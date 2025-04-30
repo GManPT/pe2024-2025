@@ -28,8 +28,8 @@ jobs:
 
       - name: Move PDFs to deployment directory
         run: |
-          mv Series/*.pdf dist/
-          mv *.pdf dist/
+          mv Series/*.pdf dist/ 2>/dev/null || true
+          mv *.pdf dist/ 2>/dev/null || true
 
       - name: Create index.html
         run: |
@@ -54,9 +54,11 @@ jobs:
           echo '    <h1>Séries Disponíveis</h1>' >> dist/index.html
           echo '    <ul>' >> dist/index.html
           for file in dist/Serie*.pdf; do
-            base=$(basename $file .pdf)
-            display_name=$(echo $base | sed 's/Serie/Série /')
-            echo "        <li><a href=\"${base}.pdf\">${display_name}</a></li>" >> dist/index.html
+            if [ -f "$file" ]; then
+              base=$(basename $file .pdf)
+              display_name=$(echo $base | sed 's/Serie/Série /')
+              echo "        <li><a href=\"${base}.pdf\">${display_name}</a></li>" >> dist/index.html
+            fi
           done
           echo '    </ul>' >> dist/index.html
           echo '    <h2>Resumo Teórico</h2>' >> dist/index.html
