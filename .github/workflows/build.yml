@@ -14,17 +14,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Get list of tex files
-        id: texfiles
-        run: |
-          series_files=$(ls Series/*.tex | tr '\n' '|')
-          all_files="${series_files}GuiaTeoricoCompleto.tex"
-          echo "::set-output name=files::${all_files%|}"  # remove trailing |
-
       - name: Compile LaTeX documents
         uses: xu-cheng/latex-action@v2
         with:
-          root_file: ${{ steps.texfiles.outputs.files }}
+          glob_root_file: |
+            Series/Serie*.tex
+            GuiaTeoricoCompleto.tex
 
       - name: Create deployment directory
         run: mkdir dist
@@ -56,9 +51,9 @@ jobs:
           echo '<body>' >> dist/index.html
           echo '    <h1>Séries Disponíveis</h1>' >> dist/index.html
           echo '    <ul>' >> dist/index.html
-          for file in dist/Series*.pdf; do
+          for file in dist/Serie*.pdf; do
             base=$(basename $file .pdf)
-            display_name=$(echo $base | sed 's/Series/Série /')
+            display_name=$(echo $base | sed 's/Serie/Série /')
             echo "        <li><a href=\"${base}.pdf\">${display_name}</a></li>" >> dist/index.html
           done
           echo '    </ul>' >> dist/index.html
