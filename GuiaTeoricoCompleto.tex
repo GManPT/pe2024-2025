@@ -1,0 +1,1143 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[portuguese]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{multicol}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+\usepackage{mdframed}
+\usetikzlibrary{automata, positioning, arrows, shapes.geometric}
+
+\pgfplotsset{compat=1.18}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+
+\title{\Huge \textbf{Guia Teórico Completo de Probabilidade e Estatística}}
+\author{Vicente Duarte}
+\date{Ano Letivo 2024/2025}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\begin{center}
+\rule{\textwidth}{1pt}
+\end{center}
+
+\begin{abstract}
+Este guia teórico apresenta uma visão abrangente dos conceitos de Probabilidade e Estatística abordados nas séries de problemas do curso. O documento está estruturado de forma progressiva, abordando desde conceitos básicos de probabilidade até distribuições de variáveis aleatórias, probabilidade condicional e técnicas de inferência estatística. É especialmente útil como material de apoio ao estudo e à resolução dos exercícios propostos.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+\section{Conceitos Fundamentais de Probabilidade}
+
+\subsection{Espaço Amostral e Eventos}
+
+O espaço amostral, geralmente representado por $\Omega$, é o conjunto de todos os resultados possíveis de uma experiência aleatória. Um evento $A$ é um subconjunto do espaço amostral, ou seja, $A \subseteq \Omega$.
+
+\begin{tcolorbox}[colback=gray!10, colframe=black, title=\textbf{Exemplo}]
+Ao lançar um dado de seis faces, o espaço amostral é $\Omega = \{1, 2, 3, 4, 5, 6\}$. O evento "sair um número par" corresponde ao conjunto $A = \{2, 4, 6\}$.
+\end{tcolorbox}
+
+\subsection{Definição de Probabilidade}
+
+A probabilidade de um evento $A$, denotada por $P(A)$, é uma medida da possibilidade de $A$ ocorrer. Pela definição axiomática de Kolmogorov, a probabilidade deve satisfazer:
+
+\begin{enumerate}[label=(\roman*)]
+    \item $P(A) \geq 0$ para qualquer evento $A$
+    \item $P(\Omega) = 1$
+    \item Se $A_1, A_2, \ldots$ são eventos mutuamente exclusivos, então $P(A_1 \cup A_2 \cup \ldots) = P(A_1) + P(A_2) + \ldots$
+\end{enumerate}
+
+\begin{tcolorbox}[colback=gray!10, colframe=black, title=\textbf{Exemplo}]
+No lançamento de uma moeda equilibrada, $P(\text{cara}) = P(\text{coroa}) = \frac{1}{2}$.
+
+Para o lançamento de um dado equilibrado, $P(\text{sair 3}) = \frac{1}{6}$.
+\end{tcolorbox}
+
+\subsection{Operações com Eventos}
+
+As operações básicas com eventos incluem:
+
+\begin{itemize}
+    \item \textbf{União} ($A \cup B$): evento que ocorre quando $A$ ou $B$ (ou ambos) ocorrem
+    \item \textbf{Interseção} ($A \cap B$): evento que ocorre quando $A$ e $B$ ocorrem simultaneamente
+    \item \textbf{Complemento} ($\overline{A}$ ou $A^c$): evento que ocorre quando $A$ não ocorre
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+    % Espaço amostral (retângulo)
+    \draw[thick] (0,0) rectangle (6,4);
+    \node at (0.5,3.5) {$\Omega$};
+    
+    % Conjunto A (círculo à esquerda)
+    \draw[thick, fill=blue!20] (2,2) circle (1.2);
+    \node at (1.3,2) {$A$};
+    
+    % Conjunto B (círculo à direita)
+    \draw[thick, fill=red!20] (4,2) circle (1.2);
+    \node at (4.7,2) {$B$};
+    
+    % Interseção A e B (área sobreposta)
+    \begin{scope}
+        \clip (2,2) circle (1.2);
+        \fill[green!20] (4,2) circle (1.2);
+    \end{scope}
+    \node at (3,2) {$A \cap B$};
+\end{tikzpicture}
+\caption{Diagrama de Venn representando eventos $A$ e $B$, sua interseção e o espaço amostral $\Omega$}
+\end{figure}
+
+\subsection{Probabilidade Condicional}
+
+A probabilidade condicional de um evento $A$ dado que o evento $B$ ocorreu, denotada por $P(A|B)$, é definida como:
+
+\begin{equation}
+P(A|B) = \frac{P(A \cap B)}{P(B)}, \quad \text{onde } P(B) > 0
+\end{equation}
+
+\begin{tcolorbox}[colback=blue!5, colframe=blue!40, title=\textbf{Fórmula Fundamental}]
+A fórmula da probabilidade condicional pode ser reorganizada para obter:
+\begin{equation}
+P(A \cap B) = P(B) \times P(A|B) = P(A) \times P(B|A)
+\end{equation}
+Esta é uma das fórmulas mais importantes e frequentemente utilizadas em problemas de probabilidade.
+\end{tcolorbox}
+
+\subsection{Independência de Eventos}
+
+Dois eventos $A$ e $B$ são independentes se e somente se:
+
+\begin{equation}
+P(A \cap B) = P(A) \times P(B)
+\end{equation}
+
+Equivalentemente, $A$ e $B$ são independentes se $P(A|B) = P(A)$ ou $P(B|A) = P(B)$.
+
+\begin{tcolorbox}[colback=gray!10, colframe=black, title=\textbf{Exemplo}]
+Ao lançar um dado duas vezes, o evento "tirar um número par no primeiro lançamento" é independente do evento "tirar um número menor que 3 no segundo lançamento".
+\end{tcolorbox}
+
+\subsection{Teorema da Probabilidade Total}
+
+Se $B_1, B_2, \ldots, B_n$ constituem uma partição do espaço amostral $\Omega$ (ou seja, são mutuamente exclusivos e $B_1 \cup B_2 \cup \ldots \cup B_n = \Omega$), então para qualquer evento $A$:
+
+\begin{equation}
+P(A) = \sum_{i=1}^{n} P(A|B_i) \times P(B_i)
+\end{equation}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+    % Espaço amostral (retângulo)
+    \draw[thick] (0,0) rectangle (8,4);
+    \node at (0.5,3.5) {$\Omega$};
+    
+    % Partição do espaço amostral
+    \fill[blue!10] (0,0) rectangle (2.66,4);
+    \fill[green!10] (2.66,0) rectangle (5.33,4);
+    \fill[red!10] (5.33,0) rectangle (8,4);
+    
+    \node at (1.33,2) {$B_1$};
+    \node at (4,2) {$B_2$};
+    \node at (6.66,2) {$B_3$};
+    
+    % Evento A (região com contorno pontilhado)
+    \draw[thick, dashed] (1,1) .. controls (2,3) and (4,3.5) .. (7,2) .. controls (6,0.5) and (3,0.5) .. (1,1);
+    \node at (3.5,1.5) {$A$};
+\end{tikzpicture}
+\caption{Ilustração do Teorema da Probabilidade Total: evento $A$ distribuído entre a partição $\{B_1, B_2, B_3\}$}
+\end{figure}
+
+\subsection{Teorema de Bayes}
+
+O Teorema de Bayes permite inverter condições em probabilidades condicionais:
+
+\begin{equation}
+P(B_i|A) = \frac{P(A|B_i) \times P(B_i)}{\sum_{j=1}^{n} P(A|B_j) \times P(B_j)}
+\end{equation}
+
+Numa forma mais simplificada, para dois eventos $A$ e $B$:
+
+\begin{equation}
+P(B|A) = \frac{P(A|B) \times P(B)}{P(A)}
+\end{equation}
+
+\begin{tcolorbox}[colback=orange!5, colframe=orange!50, title=\textbf{Dica para Aplicar o Teorema de Bayes}]
+O Teorema de Bayes é particularmente útil em problemas onde:
+\begin{itemize}
+    \item São fornecidas probabilidades do tipo $P(A|B)$
+    \item Pede-se para calcular probabilidades do tipo $P(B|A)$
+    \item Existe informação adicional que surge após uma observação inicial
+\end{itemize}
+\end{tcolorbox}
+
+\section{Variáveis Aleatórias}
+
+\subsection{Definição e Tipos}
+
+Uma variável aleatória é uma função que associa um valor numérico a cada resultado do espaço amostral. As variáveis aleatórias podem ser:
+
+\begin{itemize}
+    \item \textbf{Discretas}: assumem valores em conjunto finito ou enumerável (e.g., número de caras em 10 lançamentos de moeda)
+    \item \textbf{Contínuas}: podem assumir qualquer valor em um intervalo contínuo (e.g., tempo de espera, altura de uma pessoa)
+\end{itemize}
+
+\subsection{Função de Probabilidade (V.A. Discretas)}
+
+Para uma variável aleatória discreta $X$, a função de probabilidade $p_X(x)$ (também chamada de função massa de probabilidade) é definida como:
+
+\begin{equation}
+p_X(x) = P(X = x)
+\end{equation}
+
+Propriedades:
+\begin{enumerate}[label=(\roman*)]
+    \item $p_X(x) \geq 0$ para todo $x$
+    \item $\sum_{x} p_X(x) = 1$
+\end{enumerate}
+
+\subsection{Função Densidade de Probabilidade (V.A. Contínuas)}
+
+Para uma variável aleatória contínua $X$, a função densidade de probabilidade $f_X(x)$ satisfaz:
+
+\begin{equation}
+P(a \leq X \leq b) = \int_{a}^{b} f_X(x) \, dx
+\end{equation}
+
+Propriedades:
+\begin{enumerate}[label=(\roman*)]
+    \item $f_X(x) \geq 0$ para todo $x$
+    \item $\int_{-\infty}^{\infty} f_X(x) \, dx = 1$
+\end{enumerate}
+
+\subsection{Função de Distribuição Acumulada}
+
+A função de distribuição acumulada (FDA) $F_X(x)$ de uma variável aleatória $X$ é definida como:
+
+\begin{equation}
+F_X(x) = P(X \leq x)
+\end{equation}
+
+Para variáveis aleatórias discretas:
+\begin{equation}
+F_X(x) = \sum_{t \leq x} p_X(t)
+\end{equation}
+
+Para variáveis aleatórias contínuas:
+\begin{equation}
+F_X(x) = \int_{-\infty}^{x} f_X(t) \, dt
+\end{equation}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+    \begin{axis}[
+        width=10cm,
+        height=6cm,
+        axis lines=middle,
+        xlabel=$x$,
+        ylabel=$F_X(x)$,
+        xtick={-2, -1, 0, 1, 2, 3},
+        ytick={0, 0.25, 0.5, 0.75, 1},
+        xmin=-2.5,
+        xmax=3.5,
+        ymin=-0.1,
+        ymax=1.1,
+        legend pos=north west,
+    ]
+    
+    % Função de distribuição contínua (exemplo: normal padrão)
+    \addplot[thick, blue, domain=-2.5:3.5, samples=100] {0.5*(1+tanh(0.5*x*sqrt(2/pi)))};
+    \addlegendentry{$F_X(x)$ contínua};
+    
+    % Função de distribuição discreta (exemplo: binomial)
+    \addplot[thick, red, mark=*, only marks] coordinates {
+        (-2, 0)
+        (-1, 0.125)
+        (0, 0.5)
+        (1, 0.875)
+        (2, 1)
+    };
+    
+    \addplot[thick, red, const plot] coordinates {
+        (-2, 0)
+        (-1, 0)
+        (-1, 0.125)
+        (0, 0.125)
+        (0, 0.5)
+        (1, 0.5)
+        (1, 0.875)
+        (2, 0.875)
+        (2, 1)
+        (3, 1)
+    };
+    \addlegendentry{$F_X(x)$ discreta};
+    
+    \end{axis}
+\end{tikzpicture}
+\caption{Comparação entre funções de distribuição acumulada para variáveis aleatórias contínuas e discretas}
+\end{figure}
+
+\subsection{Valor Esperado (Média)}
+
+O valor esperado de uma variável aleatória $X$, denotado por $E[X]$ ou $\mu_X$, representa o valor médio que esperamos obter se repetirmos a experiência muitas vezes.
+
+Para variáveis aleatórias discretas:
+\begin{equation}
+E[X] = \sum_{x} x \cdot p_X(x)
+\end{equation}
+
+Para variáveis aleatórias contínuas:
+\begin{equation}
+E[X] = \int_{-\infty}^{\infty} x \cdot f_X(x) \, dx
+\end{equation}
+
+\subsection{Variância e Desvio Padrão}
+
+A variância de uma variável aleatória $X$, denotada por $\text{Var}(X)$ ou $\sigma_X^2$, mede a dispersão dos valores em torno da média:
+
+\begin{equation}
+\text{Var}(X) = E[(X - \mu_X)^2] = E[X^2] - (E[X])^2
+\end{equation}
+
+O desvio padrão $\sigma_X$ é definido como a raiz quadrada da variância:
+
+\begin{equation}
+\sigma_X = \sqrt{\text{Var}(X)}
+\end{equation}
+
+\begin{tcolorbox}[colback=blue!5, colframe=blue!40, title=\textbf{Propriedades do Valor Esperado e Variância}]
+Para constantes $a$ e $b$ e variáveis aleatórias $X$ e $Y$:
+
+\begin{align}
+E[aX + b] &= aE[X] + b \\
+\text{Var}(aX + b) &= a^2\text{Var}(X) \\
+\end{align}
+
+Se $X$ e $Y$ são independentes:
+\begin{align}
+E[X \cdot Y] &= E[X] \cdot E[Y] \\
+\text{Var}(X + Y) &= \text{Var}(X) + \text{Var}(Y)
+\end{align}
+\end{tcolorbox}
+
+\section{Distribuições Discretas Importantes}
+
+\subsection{Distribuição de Bernoulli}
+
+A distribuição de Bernoulli modela experiências com apenas dois resultados possíveis (sucesso ou fracasso). Se $X$ é uma variável aleatória de Bernoulli com parâmetro $p$ (probabilidade de sucesso), então:
+
+\begin{equation}
+P(X = x) = 
+\begin{cases}
+p, & \text{se } x = 1 \\
+1-p, & \text{se } x = 0
+\end{cases}
+\end{equation}
+
+Média: $E[X] = p$
+
+Variância: $\text{Var}(X) = p(1-p)$
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+    \begin{axis}[
+        width=8cm,
+        height=5cm,
+        ybar,
+        enlargelimits=0.15,
+        ylabel={$P(X=x)$},
+        xlabel={$x$},
+        ymin=0,
+        symbolic x coords={0,1},
+        xtick=data,
+        nodes near coords,
+        legend pos=north west,
+        ]
+        \addplot coordinates {(0,0.3) (1,0.7)};
+        \addlegendentry{$p=0.7$}
+        
+        \addplot coordinates {(0,0.5) (1,0.5)};
+        \addlegendentry{$p=0.5$}
+        
+        \addplot coordinates {(0,0.8) (1,0.2)};
+        \addlegendentry{$p=0.2$}
+    \end{axis}
+\end{tikzpicture}
+\caption{Função de massa de probabilidade da distribuição de Bernoulli para diferentes valores de $p$}
+\end{figure}
+
+\subsection{Distribuição Binomial}
+
+A distribuição binomial modela o número de sucessos em $n$ tentativas independentes de Bernoulli, cada uma com probabilidade de sucesso $p$. Se $X$ é uma variável aleatória binomial com parâmetros $n$ e $p$, denotamos $X \sim \text{Bin}(n, p)$ e:
+
+\begin{equation}
+P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}, \quad k = 0, 1, 2, \ldots, n
+\end{equation}
+
+onde $\binom{n}{k} = \frac{n!}{k!(n-k)!}$
+
+Média: $E[X] = np$
+
+Variância: $\text{Var}(X) = np(1-p)$
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+    \begin{axis}[
+        width=10cm,
+        height=6cm,
+        ybar,
+        bar width=5pt,
+        enlargelimits=0.15,
+        ylabel={$P(X=k)$},
+        xlabel={$k$},
+        ymin=0,
+        xtick={0,1,2,3,4,5,6,7,8,9,10},
+        legend pos=north east,
+        ]
+        \addplot coordinates {
+            (0,0.0010) (1,0.0098) (2,0.0439) (3,0.1172) (4,0.2051) (5,0.2461) 
+            (6,0.2051) (7,0.1172) (8,0.0439) (9,0.0098) (10,0.0010)
+        };
+        \addlegendentry{$n=10, p=0.5$}
+        
+        \addplot coordinates {
+            (0,0.3487) (1,0.3874) (2,0.1937) (3,0.0574) (4,0.0112) (5,0.0015)
+            (6,0.0001) (7,0.0000) (8,0.0000) (9,0.0000) (10,0.0000)
+        };
+        \addlegendentry{$n=10, p=0.1$}
+    \end{axis}
+\end{tikzpicture}
+\caption{Função de massa de probabilidade da distribuição binomial para diferentes valores de $p$ com $n=10$}
+\end{figure}
+
+\subsection{Distribuição Geométrica}
+
+A distribuição geométrica modela o número de tentativas necessárias até o primeiro sucesso em tentativas independentes de Bernoulli. Se $X$ é uma variável aleatória geométrica com parâmetro $p$ (probabilidade de sucesso em cada tentativa), então:
+
+\begin{equation}
+P(X = k) = (1-p)^{k-1} p, \quad k = 1, 2, 3, \ldots
+\end{equation}
+
+Média: $E[X] = \frac{1}{p}$
+
+Variância: $\text{Var}(X) = \frac{1-p}{p^2}$
+
+\begin{tcolorbox}[colback=green!5, colframe=green!40, title=\textbf{Propriedade de "Falta de Memória"}]
+A distribuição geométrica é a única distribuição discreta que possui a propriedade de "falta de memória":
+\begin{equation}
+P(X > n+m | X > n) = P(X > m)
+\end{equation}
+Esta propriedade significa que, se já esperamos $n$ tentativas sem sucesso, a probabilidade de precisarmos de mais $m$ tentativas é igual à probabilidade original de precisarmos de $m$ tentativas.
+\end{tcolorbox}
+
+\subsection{Distribuição de Poisson}
+
+A distribuição de Poisson modela o número de ocorrências de um evento em um intervalo fixo, quando esses eventos ocorrem a uma taxa média constante e independentemente uns dos outros. Se $X$ é uma variável aleatória de Poisson com parâmetro $\lambda$ (taxa média de ocorrências), denotamos $X \sim \text{Poisson}(\lambda)$ e:
+
+\begin{equation}
+P(X = k) = \frac{e^{-\lambda} \lambda^k}{k!}, \quad k = 0, 1, 2, \ldots
+\end{equation}
+
+Média: $E[X] = \lambda$
+
+Variância: $\text{Var}(X) = \lambda$
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+    \begin{axis}[
+        width=10cm,
+        height=6cm,
+        ybar,
+        bar width=4pt,
+        enlargelimits=0.15,
+        ylabel={$P(X=k)$},
+        xlabel={$k$},
+        ymin=0,
+        xtick={0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15},
+        legend pos=north east,
+        ]
+        \addplot coordinates {
+            (0,0.0498) (1,0.1494) (2,0.2240) (3,0.2240) (4,0.1680) (5,0.1008) 
+            (6,0.0504) (7,0.0216) (8,0.0081) (9,0.0027) (10,0.0008) (11,0.0002)
+            (12,0.0001) (13,0.0000) (14,0.0000) (15,0.0000)
+        };
+        \addlegendentry{$\lambda=3$}
+        
+        \addplot coordinates {
+            (0,0.0067) (1,0.0337) (2,0.0842) (3,0.1404) (4,0.1755) (5,0.1755) 
+            (6,0.1462) (7,0.1044) (8,0.0653) (9,0.0363) (10,0.0181) (11,0.0082)
+            (12,0.0034) (13,0.0013) (14,0.0005) (15,0.0002)
+        };
+        \addlegendentry{$\lambda=5$}
+    \end{axis}
+\end{tikzpicture}
+\caption{Função de massa de probabilidade da distribuição de Poisson para diferentes valores de $\lambda$}
+\end{figure}
+
+\section{Distribuições Contínuas Importantes}
+
+\subsection{Distribuição Uniforme Contínua}
+
+A distribuição uniforme contínua modela situações onde todos os valores em um intervalo $[a,b]$ têm a mesma probabilidade de ocorrer. Se $X$ é uma variável aleatória uniforme no intervalo $[a,b]$, denotamos $X \sim \text{Uniforme}(a,b)$ e sua função densidade de probabilidade é:
+
+\begin{equation}
+f_X(x) = 
+\begin{cases}
+\frac{1}{b-a}, & \text{se } a \leq x \leq b \\
+0, & \text{caso contrário}
+\end{cases}
+\end{equation}
+
+Função de distribuição acumulada:
+\begin{equation}
+F_X(x) = 
+\begin{cases}
+0, & \text{se } x < a \\
+\frac{x-a}{b-a}, & \text{se } a \leq x \leq b \\
+1, & \text{se } x > b
+\end{cases}
+\end{equation}
+
+Média: $E[X] = \frac{a+b}{2}$
+
+Variância: $\text{Var}(X) = \frac{(b-a)^2}{12}$
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+    \begin{axis}[
+        width=5cm,
+        height=4cm,
+        axis lines=middle,
+        xlabel=$x$,
+        ylabel=$f_X(x)$,
+        xmin=-1,
+        xmax=6,
+        ymin=-0.1,
+        ymax=0.6,
+        title={Função Densidade},
+    ]
+    
+    % Uniforme(0,5)
+    \addplot[thick, domain=-1:6, samples=100, blue] coordinates {
+        (-1, 0) (0, 0) (0, 0.2) (5, 0.2) (5, 0) (6, 0)
+    };
+    
+    \end{axis}
+\end{tikzpicture}
+\hfill
+\begin{tikzpicture}
+    \begin{axis}[
+        width=5cm,
+        height=4cm,
+        axis lines=middle,
+        xlabel=$x$,
+        ylabel=$F_X(x)$,
+        xmin=-1,
+        xmax=6,
+        ymin=-0.1,
+        ymax=1.1,
+        title={Função de Distribuição},
+    ]
+    
+    % Uniforme(0,5)
+    \addplot[thick, domain=-1:6, samples=100, blue] coordinates {
+        (-1, 0) (0, 0) (5, 1) (6, 1)
+    };
+    
+    \end{axis}
+\end{tikzpicture}
+\caption{Funções de densidade e de distribuição da distribuição uniforme contínua no intervalo $[0,5]$}
+\end{figure}
+
+\subsection{Distribuição Exponencial}
+
+A distribuição exponencial é frequentemente usada para modelar o tempo até a ocorrência de um evento, quando a taxa de ocorrência é constante. Se $X$ é uma variável aleatória exponencial com parâmetro $\lambda > 0$ (taxa), denotamos $X \sim \text{Exp}(\lambda)$ e sua função densidade de probabilidade é:
+
+\begin{equation}
+f_X(x) = 
+\begin{cases}
+\lambda e^{-\lambda x}, & \text{se } x \geq 0 \\
+0, & \text{se } x < 0
+\end{cases}
+\end{equation}
+
+Função de distribuição acumulada:
+\begin{equation}
+F_X(x) = 
+\begin{cases}
+1 - e^{-\lambda x}, & \text{se } x \geq 0 \\
+0, & \text{se } x < 0
+\end{cases}
+\end{equation}
+
+Média: $E[X] = \frac{1}{\lambda}$
+
+Variância: $\text{Var}(X) = \frac{1}{\lambda^2}$
+
+\begin{tcolorbox}[colback=green!5, colframe=green!40, title=\textbf{Propriedade de "Falta de Memória"}]
+Assim como a distribuição geométrica, a distribuição exponencial possui a propriedade de "falta de memória":
+\begin{equation}
+P(X > s+t | X > t) = P(X > s)
+\end{equation}
+Isso significa que, se um componente já funcionou por $t$ unidades de tempo sem falhar, a probabilidade de ele funcionar por mais $s$ unidades de tempo é igual à probabilidade original de funcionar por $s$ unidades de tempo.
+\end{tcolorbox}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+    \begin{axis}[
+        width=10cm,
+        height=6cm,
+        domain=0:5,
+        samples=100,
+        axis lines=middle,
+        xlabel=$x$,
+        ylabel=$f_X(x)$,
+        xmin=-0.5,
+        xmax=5,
+        ymin=-0.1,
+        ymax=1.1,
+        legend pos=north east,
+        ]
+        \addplot[thick, blue, domain=0:5] {1*exp(-1*x)};
+        \addlegendentry{$\lambda=1$}
+        
+        \addplot[thick, red, domain=0:5] {0.5*exp(-0.5*x)};
+        \addlegendentry{$\lambda=0.5$}
+        
+        \addplot[thick, green, domain=0:5] {2*exp(-2*x)};
+        \addlegendentry{$\lambda=2$}
+    \end{axis}
+\end{tikzpicture}
+\caption{Função densidade de probabilidade da distribuição exponencial para diferentes valores de $\lambda$}
+\end{figure}
+
+\subsection{Distribuição Normal}
+
+A distribuição normal (ou gaussiana) é uma das distribuições mais importantes em estatística. Se $X$ é uma variável aleatória normal com média $\mu$ e variância $\sigma^2$, denotamos $X \sim N(\mu, \sigma^2)$ e sua função densidade de probabilidade é:
+
+\begin{equation}
+f_X(x) = \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}, \quad -\infty < x < \infty
+\end{equation}
+
+A distribuição normal padrão, denotada por $Z \sim N(0, 1)$, tem média zero e variância unitária. Qualquer variável aleatória normal pode ser padronizada através da transformação $Z = \frac{X - \mu}{\sigma}$.
+
+Média: $E[X] = \mu$
+
+Variância: $\text{Var}(X) = \sigma^2$
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+    \begin{axis}[
+        width=10cm,
+        height=6cm,
+        domain=-4:4,
+        samples=100,
+        axis lines=middle,
+        xlabel=$x$,
+        ylabel=$f_X(x)$,
+        xmin=-4.5,
+        xmax=4.5,
+        ymin=-0.05,
+        ymax=0.45,
+        legend pos=north east,
+        ]
+        \addplot[thick, blue, domain=-4:4] {1/(1*sqrt(2*pi))*exp(-(x-0)^2/(2*1^2))};
+        \addlegendentry{$\mu=0, \sigma=1$}
+        
+        \addplot[thick, red, domain=-4:4] {1/(1.5*sqrt(2*pi))*exp(-(x-0)^2/(2*1.5^2))};
+        \addlegendentry{$\mu=0, \sigma=1.5$}
+        
+        \addplot[thick, green, domain=-4:4] {1/(1*sqrt(2*pi))*exp(-(x-2)^2/(2*1^2))};
+        \addlegendentry{$\mu=2, \sigma=1$}
+    \end{axis}
+\end{tikzpicture}
+\caption{Função densidade de probabilidade da distribuição normal para diferentes valores de $\mu$ e $\sigma$}
+\end{figure}
+
+\begin{tcolorbox}[colback=yellow!5, colframe=yellow!40, title=\textbf{Propriedades da Distribuição Normal}]
+\begin{itemize}
+    \item É simétrica em torno da média $\mu$
+    \item A moda e a mediana coincidem com a média
+    \item Tem forma de sino, com ponto de inflexão em $\mu \pm \sigma$
+    \item Aproximadamente 68,27\% dos valores estão a uma distância de até $\sigma$ da média
+    \item Aproximadamente 95,45\% dos valores estão a uma distância de até $2\sigma$ da média
+    \item Aproximadamente 99,73\% dos valores estão a uma distância de até $3\sigma$ da média (regra 3-sigma)
+\end{itemize}
+\end{tcolorbox}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+    \begin{axis}[
+        width=10cm,
+        height=6cm,
+        domain=-4:4,
+        samples=100,
+        axis lines=middle,
+        xlabel=$x$,
+        ylabel=$f_X(x)$,
+        xmin=-4,
+        xmax=4,
+        ymin=0,
+        ymax=0.45,
+        legend pos=north east,
+        ]
+        \addplot[thick, blue, domain=-4:4] {1/(1*sqrt(2*pi))*exp(-(x-0)^2/(2*1^2))};
+        
+        \addplot[fill=blue!20, domain=-1:1, samples=100] {1/(1*sqrt(2*pi))*exp(-(x-0)^2/(2*1^2))} \closedcycle;
+        \node at (axis cs:0,0.1) {68.27\%};
+        
+        \addplot[fill=blue!10, domain=-2:-1, samples=100] {1/(1*sqrt(2*pi))*exp(-(x-0)^2/(2*1^2))} \closedcycle;
+        \addplot[fill=blue!10, domain=1:2, samples=100] {1/(1*sqrt(2*pi))*exp(-(x-0)^2/(2*1^2))} \closedcycle;
+        \node at (axis cs:-1.5,0.05) {13.59\%};
+        \node at (axis cs:1.5,0.05) {13.59\%};
+        
+        \addplot[fill=blue!5, domain=-3:-2, samples=100] {1/(1*sqrt(2*pi))*exp(-(x-0)^2/(2*1^2))} \closedcycle;
+        \addplot[fill=blue!5, domain=2:3, samples=100] {1/(1*sqrt(2*pi))*exp(-(x-0)^2/(2*1^2))} \closedcycle;
+        \node at (axis cs:-2.5,0.02) {2.14\%};
+        \node at (axis cs:2.5,0.02) {2.14\%};
+    \end{axis}
+\end{tikzpicture}
+\caption{Distribuição normal padrão com áreas correspondentes a diferentes intervalos de desvios padrão}
+\end{figure}
+
+\section{Variáveis Aleatórias Multidimensionais}
+
+\subsection{Distribuição Conjunta}
+
+Para variáveis aleatórias discretas $X$ e $Y$, a função de probabilidade conjunta é:
+
+\begin{equation}
+p_{X,Y}(x,y) = P(X = x, Y = y)
+\end{equation}
+
+Para variáveis aleatórias contínuas $X$ e $Y$, a função densidade de probabilidade conjunta satisfaz:
+
+\begin{equation}
+P((X,Y) \in A) = \iint_A f_{X,Y}(x,y) \, dx \, dy
+\end{equation}
+
+\subsection{Distribuições Marginais}
+
+Para variáveis aleatórias discretas:
+\begin{align}
+p_X(x) &= \sum_y p_{X,Y}(x,y) \\
+p_Y(y) &= \sum_x p_{X,Y}(x,y)
+\end{align}
+
+Para variáveis aleatórias contínuas:
+\begin{align}
+f_X(x) &= \int_{-\infty}^{\infty} f_{X,Y}(x,y) \, dy \\
+f_Y(y) &= \int_{-\infty}^{\infty} f_{X,Y}(x,y) \, dx
+\end{align}
+
+\subsection{Distribuições Condicionais}
+
+Para variáveis aleatórias discretas:
+\begin{align}
+p_{X|Y}(x|y) &= \frac{p_{X,Y}(x,y)}{p_Y(y)}, \quad \text{se } p_Y(y) > 0 \\
+p_{Y|X}(y|x) &= \frac{p_{X,Y}(x,y)}{p_X(x)}, \quad \text{se } p_X(x) > 0
+\end{align}
+
+Para variáveis aleatórias contínuas:
+\begin{align}
+f_{X|Y}(x|y) &= \frac{f_{X,Y}(x,y)}{f_Y(y)}, \quad \text{se } f_Y(y) > 0 \\
+f_{Y|X}(y|x) &= \frac{f_{X,Y}(x,y)}{f_X(x)}, \quad \text{se } f_X(x) > 0
+\end{align}
+
+\subsection{Independência de Variáveis Aleatórias}
+
+Duas variáveis aleatórias $X$ e $Y$ são independentes se e somente se:
+
+Para variáveis aleatórias discretas:
+\begin{equation}
+p_{X,Y}(x,y) = p_X(x) \cdot p_Y(y), \quad \text{para todo } x, y
+\end{equation}
+
+Para variáveis aleatórias contínuas:
+\begin{equation}
+f_{X,Y}(x,y) = f_X(x) \cdot f_Y(y), \quad \text{para todo } x, y
+\end{equation}
+
+\subsection{Covariância e Correlação}
+
+A covariância entre duas variáveis aleatórias $X$ e $Y$ é definida como:
+
+\begin{equation}
+\text{Cov}(X,Y) = E[(X - \mu_X)(Y - \mu_Y)] = E[XY] - E[X]E[Y]
+\end{equation}
+
+onde $\mu_X = E[X]$ e $\mu_Y = E[Y]$.
+
+A correlação entre $X$ e $Y$ é:
+
+\begin{equation}
+\rho_{X,Y} = \frac{\text{Cov}(X,Y)}{\sigma_X \sigma_Y}
+\end{equation}
+
+onde $\sigma_X = \sqrt{\text{Var}(X)}$ e $\sigma_Y = \sqrt{\text{Var}(Y)}$.
+
+\begin{tcolorbox}[colback=blue!5, colframe=blue!40, title=\textbf{Propriedades da Correlação}]
+\begin{itemize}
+    \item $-1 \leq \rho_{X,Y} \leq 1$
+    \item $\rho_{X,Y} = 1$ ou $\rho_{X,Y} = -1$ se e somente se existe uma relação linear perfeita entre $X$ e $Y$
+    \item $\rho_{X,Y} = 0$ se $X$ e $Y$ são independentes (a recíproca não é necessariamente verdadeira)
+\end{itemize}
+\end{tcolorbox}
+
+\subsection{Esperança Condicional}
+
+A esperança condicional de uma variável aleatória $X$ dado $Y = y$ é definida como:
+
+Para variáveis aleatórias discretas:
+\begin{equation}
+E[X|Y=y] = \sum_x x \cdot p_{X|Y}(x|y)
+\end{equation}
+
+Para variáveis aleatórias contínuas:
+\begin{equation}
+E[X|Y=y] = \int_{-\infty}^{\infty} x \cdot f_{X|Y}(x|y) \, dx
+\end{equation}
+
+A esperança condicional $E[X|Y]$ pode ser vista como uma função de $Y$.
+
+\begin{tcolorbox}[colback=green!5, colframe=green!40, title=\textbf{Lei da Esperança Total}]
+\begin{equation}
+E[X] = E[E[X|Y]]
+\end{equation}
+
+Ou seja, a esperança incondicional de $X$ pode ser obtida tomando a média ponderada das esperanças condicionais.
+\end{tcolorbox}
+
+\section{Teoremas Limite e Aproximações}
+
+\subsection{Lei dos Grandes Números}
+
+A Lei dos Grandes Números assegura que a média aritmética de um grande número de variáveis aleatórias independentes e identicamente distribuídas converge para a esperança comum dessas variáveis.
+
+Seja $X_1, X_2, \ldots, X_n$ uma sequência de variáveis aleatórias independentes e identicamente distribuídas com $E[X_i] = \mu$. Defina $\overline{X}_n = \frac{1}{n}(X_1 + X_2 + \ldots + X_n)$. Então:
+
+\begin{equation}
+\overline{X}_n \xrightarrow{P} \mu \quad \text{quando } n \to \infty
+\end{equation}
+
+onde $\xrightarrow{P}$ denota convergência em probabilidade.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    width=10cm,
+    height=6cm,
+    xlabel={$n$ (número de lançamentos)},
+    ylabel={Frequência relativa de caras},
+    xmin=0,
+    xmax=100,
+    ymin=0,
+    ymax=1,
+    grid=major,
+    legend pos=south east,
+    ]
+    \addplot[thick, blue, domain=1:100, samples=100] {0.5 + 0.5*sin(deg(x))/sqrt(x)};
+    \addplot[thick, red, domain=1:100, samples=100] {0.5 + 0.25*cos(deg(2*x))/sqrt(x)};
+    \addplot[thick, green, domain=1:100, samples=100] {0.5 - 0.4*sin(deg(0.5*x))/sqrt(x)};
+    \addplot[thick, black, domain=1:100, samples=100] {0.5};
+    \legend{Simulação 1, Simulação 2, Simulação 3, Valor Esperado}
+\end{axis}
+\end{tikzpicture}
+\caption{Ilustração da Lei dos Grandes Números: frequência relativa de caras em $n$ lançamentos de uma moeda equilibrada}
+\end{figure}
+
+\subsection{Teorema Central do Limite}
+
+O Teorema Central do Limite estabelece que a soma de um grande número de variáveis aleatórias independentes e identicamente distribuídas segue aproximadamente uma distribuição normal, independentemente da distribuição original das variáveis.
+
+Seja $X_1, X_2, \ldots, X_n$ uma sequência de variáveis aleatórias independentes e identicamente distribuídas com $E[X_i] = \mu$ e $\text{Var}(X_i) = \sigma^2 < \infty$. Defina $S_n = X_1 + X_2 + \ldots + X_n$. Então, para $n$ suficientemente grande:
+
+\begin{equation}
+\frac{S_n - n\mu}{\sigma\sqrt{n}} \xrightarrow{d} N(0, 1) \quad \text{quando } n \to \infty
+\end{equation}
+
+onde $\xrightarrow{d}$ denota convergência em distribuição.
+
+\begin{tcolorbox}[colback=orange!5, colframe=orange!40, title=\textbf{Aplicação do Teorema Central do Limite}]
+O TCL permite aproximar a distribuição da soma de várias variáveis aleatórias por uma distribuição normal, facilitando enormemente os cálculos de probabilidades. Por exemplo, para $n$ grande:
+
+\begin{equation}
+P\left(a \leq \frac{S_n - n\mu}{\sigma\sqrt{n}} \leq b\right) \approx \Phi(b) - \Phi(a)
+\end{equation}
+
+onde $\Phi$ é a função de distribuição acumulada da normal padrão.
+\end{tcolorbox}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    width=10cm,
+    height=6cm,
+    xlabel={$x$},
+    ylabel={Densidade},
+    xmin=-4,
+    xmax=4,
+    ymin=0,
+    ymax=0.7,
+    grid=major,
+    legend pos=north west,
+    ]
+    
+    % Histograma para n=1 (distribuição uniforme)
+    \addplot[ybar interval, fill=blue!20, draw=blue] coordinates {
+        (-3, 0) (-2, 0) (-1, 0) (0, 0.5) (1, 0.5) (2, 0) (3, 0) (4, 0)
+    };
+    
+    % Histograma para n=2 (soma de duas uniformes)
+    \addplot[ybar interval, fill=green!20, draw=green] coordinates {
+        (-3, 0) (-2, 0) (-1, 0.25) (0, 0.5) (1, 0.25) (2, 0) (3, 0) (4, 0)
+    };
+    
+    % Histograma para n=12 (soma de doze uniformes)
+    \addplot[thick, domain=-4:4, samples=100, red] {1/(sqrt(12/12)*sqrt(2*pi))*exp(-(x-0)^2/(2*(12/12)))};
+    
+    \legend{$n=1$, $n=2$, $n=12$}
+\end{axis}
+\end{tikzpicture}
+\caption{Ilustração do Teorema Central do Limite: a soma de $n$ variáveis aleatórias independentes e identicamente distribuídas aproxima-se de uma distribuição normal conforme $n$ aumenta}
+\end{figure}
+
+\subsection{Aproximação da Distribuição Binomial pela Normal}
+
+Para valores grandes de $n$ e valores de $p$ não muito próximos de 0 ou 1, a distribuição binomial $\text{Bin}(n, p)$ pode ser aproximada por uma distribuição normal com média $np$ e variância $np(1-p)$:
+
+\begin{equation}
+\text{Bin}(n, p) \approx N(np, np(1-p))
+\end{equation}
+
+Regra prática: a aproximação é considerada boa quando $np > 5$ e $n(1-p) > 5$.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    width=10cm,
+    height=6cm,
+    xlabel={$k$},
+    ylabel={$P(X=k)$},
+    xmin=0,
+    xmax=40,
+    ymin=0,
+    ymax=0.15,
+    grid=major,
+    legend pos=north east,
+    ]
+    
+    % Binomial(30, 0.5)
+    \addplot[ybar, fill=blue!20, draw=blue, bar width=1pt] coordinates {
+        (5, 0.000073) (6, 0.000244) (7, 0.000731) (8, 0.00198) (9, 0.00485) (10, 0.0107)
+        (11, 0.0214) (12, 0.0389) (13, 0.0642) (14, 0.0962) (15, 0.1319)
+        (16, 0.1649) (17, 0.1875) (18, 0.1941) (19, 0.1811) (20, 0.1527)
+        (21, 0.1162) (22, 0.0804) (23, 0.0501) (24, 0.0282) (25, 0.0142)
+    };
+    
+    % Normal approximation
+    \addplot[thick, domain=0:40, samples=100, red] {1/(sqrt(30*0.5*0.5)*sqrt(2*pi))*exp(-((x-30*0.5)^2)/(2*30*0.5*0.5))};
+    
+    \legend{Binomial, Aproximação Normal}
+\end{axis}
+\end{tikzpicture}
+\caption{Aproximação da distribuição binomial pela distribuição normal}
+\end{figure}
+
+\section{Estatística Inferencial Básica}
+
+\subsection{Estimação Pontual}
+
+A estimação pontual consiste em utilizar uma única estatística (estimador) para estimar um parâmetro desconhecido da população.
+
+\begin{itemize}
+    \item \textbf{Estimador}: função dos dados da amostra
+    \item \textbf{Estimativa}: valor específico do estimador calculado a partir de dados amostrais
+\end{itemize}
+
+Propriedades desejáveis de um estimador:
+\begin{itemize}
+    \item \textbf{Não-viesado}: $E[\hat{\theta}] = \theta$ (o valor esperado do estimador é igual ao parâmetro)
+    \item \textbf{Consistente}: $\hat{\theta} \xrightarrow{P} \theta$ quando $n \to \infty$ (o estimador converge em probabilidade para o parâmetro)
+    \item \textbf{Eficiente}: tem a menor variância possível entre os estimadores não-viesados
+\end{itemize}
+
+Estimadores comuns:
+\begin{align}
+\text{Média amostral: } \overline{X} &= \frac{1}{n}\sum_{i=1}^{n}X_i \\
+\text{Variância amostral: } S^2 &= \frac{1}{n-1}\sum_{i=1}^{n}(X_i - \overline{X})^2 \\
+\text{Proporção amostral: } \hat{p} &= \frac{X}{n} 
+\end{align}
+
+\subsection{Intervalos de Confiança}
+
+Um intervalo de confiança é um intervalo de valores que, com uma certa probabilidade (nível de confiança), contém o verdadeiro valor do parâmetro populacional.
+
+Para a média populacional $\mu$ de uma distribuição normal com variância $\sigma^2$ conhecida, um intervalo de confiança de nível $(1-\alpha)$ é:
+
+\begin{equation}
+\overline{X} \pm z_{\alpha/2} \frac{\sigma}{\sqrt{n}}
+\end{equation}
+
+onde $z_{\alpha/2}$ é o quantil de ordem $1-\alpha/2$ da distribuição normal padrão.
+
+Se a variância $\sigma^2$ é desconhecida e a amostra é de uma distribuição normal, utiliza-se a distribuição t de Student:
+
+\begin{equation}
+\overline{X} \pm t_{\alpha/2, n-1} \frac{S}{\sqrt{n}}
+\end{equation}
+
+onde $t_{\alpha/2, n-1}$ é o quantil de ordem $1-\alpha/2$ da distribuição t com $n-1$ graus de liberdade.
+
+\begin{tcolorbox}[colback=blue!5, colframe=blue!40, title=\textbf{Interpretação Correta de um Intervalo de Confiança}]
+Um intervalo de confiança de 95\% não significa que a probabilidade do parâmetro estar no intervalo é 95\%. Significa que, se muitas amostras fossem coletadas e intervalos de confiança calculados, 95\% desses intervalos conteriam o verdadeiro valor do parâmetro.
+\end{tcolorbox}
+
+\subsection{Testes de Hipóteses}
+
+Um teste de hipóteses é um procedimento para decidir se uma hipótese sobre a população é plausível, com base em dados amostrais.
+
+\begin{itemize}
+    \item \textbf{Hipótese nula} ($H_0$): hipótese que está sendo testada
+    \item \textbf{Hipótese alternativa} ($H_1$ ou $H_a$): hipótese que será aceita se $H_0$ for rejeitada
+    \item \textbf{Estatística de teste}: função dos dados que é usada para decidir se $H_0$ deve ser rejeitada
+    \item \textbf{Região crítica}: conjunto de valores da estatística de teste que levam à rejeição de $H_0$
+    \item \textbf{Nível de significância} ($\alpha$): probabilidade de rejeitar $H_0$ quando ela é verdadeira (erro Tipo I)
+    \item \textbf{Valor-p}: probabilidade de observar um valor da estatística de teste pelo menos tão extremo quanto o observado, supondo que $H_0$ seja verdadeira
+\end{itemize}
+
+Para testar $H_0: \mu = \mu_0$ contra $H_1: \mu \neq \mu_0$ (teste bilateral) para uma distribuição normal com $\sigma$ conhecido:
+
+\begin{equation}
+Z = \frac{\overline{X} - \mu_0}{\sigma/\sqrt{n}}
+\end{equation}
+
+Rejeita-se $H_0$ ao nível de significância $\alpha$ se $|Z| > z_{\alpha/2}$.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    width=10cm,
+    height=6cm,
+    xlabel={$z$},
+    ylabel={$f(z)$},
+    xmin=-4,
+    xmax=4,
+    ymin=0,
+    ymax=0.5,
+    grid=major,
+    ]
+    
+    % Normal padrão
+    \addplot[thick, domain=-4:4, samples=100, blue] {1/sqrt(2*pi)*exp(-x^2/2)};
+    
+    % Região crítica (bilateral)
+    \addplot[fill=red!20, domain=-4:-1.96, samples=100] {1/sqrt(2*pi)*exp(-x^2/2)} \closedcycle;
+    \addplot[fill=red!20, domain=1.96:4, samples=100] {1/sqrt(2*pi)*exp(-x^2/2)} \closedcycle;
+    
+    % Linhas verticais
+    \draw[dashed] (axis cs:-1.96,0) -- (axis cs:-1.96,0.4);
+    \draw[dashed] (axis cs:1.96,0) -- (axis cs:1.96,0.4);
+    
+    % Texto
+    \node at (axis cs:0,0.45) {Região de Aceitação};
+    \node at (axis cs:-3,0.1) {Região Crítica};
+    \node at (axis cs:3,0.1) {Região Crítica};
+    \node at (axis cs:-1.96,-0.02) {$-z_{\alpha/2}$};
+    \node at (axis cs:1.96,-0.02) {$z_{\alpha/2}$};
+\end{axis}
+\end{tikzpicture}
+\caption{Regiões de aceitação e crítica para um teste bilateral ao nível de significância $\alpha = 5\%$}
+\end{figure}
+
+\section{Exemplo de Aplicação Completa}
+
+\subsection{Contexto do Problema}
+
+Suponha que uma empresa de semicondutores quer testar se um novo método de fabricação melhora a vida útil dos seus chips. A vida útil dos chips com o método atual segue aproximadamente uma distribuição normal com média $\mu = 1200$ horas e desvio padrão $\sigma = 150$ horas. 
+
+A empresa testa 36 chips produzidos com o novo método e obtém uma vida útil média de 1245 horas. Eles querem saber se há evidência estatística de que o novo método melhora a vida útil.
+
+\subsection{Formulação do Teste de Hipóteses}
+
+\begin{align}
+H_0: \mu &= 1200 \text{ (o novo método não melhora a vida útil)} \\
+H_1: \mu &> 1200 \text{ (o novo método melhora a vida útil)}
+\end{align}
+
+\subsection{Cálculo da Estatística de Teste}
+
+Considerando o desvio padrão conhecido:
+
+\begin{equation}
+Z = \frac{\overline{X} - \mu_0}{\sigma/\sqrt{n}} = \frac{1245 - 1200}{150/\sqrt{36}} = \frac{45}{25} = 1.8
+\end{equation}
+
+\subsection{Decisão}
+
+Para um teste unilateral com nível de significância $\alpha = 0.05$, o valor crítico é $z_{0.05} = 1.645$.
+
+Como $Z = 1.8 > 1.645$, rejeitamos $H_0$ ao nível de significância de 5\%.
+
+\subsection{Cálculo do Valor-p}
+
+\begin{equation}
+\text{Valor-p} = P(Z > 1.8) = 1 - \Phi(1.8) \approx 0.0359
+\end{equation}
+
+onde $\Phi$ é a função de distribuição acumulada da normal padrão.
+
+\subsection{Interpretação}
+
+O valor-p de 0.0359 é menor que o nível de significância de 0.05, o que confirma nossa decisão de rejeitar $H_0$. Há evidência estatística para concluir que o novo método de fabricação melhora a vida útil dos chips.
+
+\subsection{Intervalo de Confiança}
+
+Um intervalo de confiança de 95\% para a média da vida útil com o novo método é:
+
+\begin{align}
+\overline{X} \pm z_{0.025} \frac{\sigma}{\sqrt{n}} &= 1245 \pm 1.96 \cdot \frac{150}{\sqrt{36}} \\
+&= 1245 \pm 1.96 \cdot 25 \\
+&= 1245 \pm 49 \\
+&= [1196, 1294]
+\end{align}
+
+\subsection{Interpretação do Intervalo}
+
+O intervalo de confiança de 95\% para a média da vida útil dos chips produzidos com o novo método vai de 1196 a 1294 horas. Como este intervalo contém o valor 1200 (embora por uma margem pequena), isso sugere que a melhoria pode não ser tão substancial quanto se esperava inicialmente.
+
+\subsection{Conclusão}
+
+Embora haja evidência estatística para concluir que o novo método melhora a vida útil dos chips (teste de hipóteses), o intervalo de confiança sugere que a melhoria pode ser modesta. A empresa deve considerar outros fatores, como o custo da implementação do novo método, antes de tomar uma decisão final.
+
+\begin{tcolorbox}[colback=green!5, colframe=green!40, title=\textbf{Dica de Interpretação}]
+Sempre considere tanto o resultado do teste de hipóteses quanto o intervalo de confiança ao tomar decisões baseadas em dados estatísticos. O teste de hipóteses fornece uma decisão binária (rejeitar ou não rejeitar), enquanto o intervalo de confiança fornece uma gama de valores plausíveis para o parâmetro, o que pode ser mais informativo para a tomada de decisões práticas.
+\end{tcolorbox}
+
+\end{document}

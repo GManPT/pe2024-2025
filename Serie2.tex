@@ -1,0 +1,239 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{titling}   
+\usepackage[portuguese]{babel}
+\usepackage{amsmath} 
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{titling}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{cancel}
+\usepackage{mdframed}
+\usetikzlibrary{automata, positioning}
+
+\setlength{\droptitle}{-6em}
+\pretitle{\begin{center}\LARGE}
+\posttitle{\par\end{center}}
+\preauthor{\begin{center}\large}
+\postauthor{\end{center}} 
+\predate{\begin{center}\large} 
+\postdate{\end{center}} 
+
+\author{Series de Problemas 2}
+
+\begin{document}
+
+\title{Probabilidade e Estatística}
+\date{24 de Março de 2025}
+\maketitle
+
+\begin{enumerate}
+  \item \textbf{Estima-se que 9\% dos doentes que se dirigem a um dado hospital durante um dado surto de gripe tenham gripe. A probabilidade de haver pelo menos 4 doentes com gripe num conjunto de 18 doentes que se dirigem ao hospital durante esse surto de gripe é:}
+    
+  \vspace{0.3cm}
+  
+  \begin{mdframed}[backgroundcolor=gray!10, linewidth=0pt, innertopmargin=10pt, innerbottommargin=10pt]
+  \textbf{Resolução:}
+  
+  Defina-se a variável aleatória $X$ como o número de doentes com gripe em 18 doentes. Observe-se que:
+  \begin{align*}
+      p &= 0.09 \quad \text{(probabilidade de um doente ter gripe)} \\
+      n &= 18 \quad \text{(número total de doentes)}
+  \end{align*}
+
+  Note-se que $X$ segue uma distribuição binomial:
+  \begin{align*}
+      X &\sim \text{Bin}(18, 0.09) \\
+      P(X \geq 4) &= 1 - P(X < 4) \\
+      &= 1 - [P(X=0) + P(X=1) + P(X=2) + P(X=3)]
+  \end{align*}
+  
+  Utilizando a função \texttt{BinomialCD} da calculadora Casio fx-CG50, calcula-se a probabilidade acumulada:
+  \begin{align*}
+      P(X < 4) &= P(X \leq 3) = 0.92773717 \\
+      P(X \geq 4) &= 1 - 0.92773717 = 0.07226283
+  \end{align*}
+
+  \textbf{Resposta:} A probabilidade de pelo menos 4 entre 18 doentes terem gripe é aproximadamente 0.07 ou 7.23\%.
+  \end{mdframed}
+
+  \vspace{0.5cm}
+
+  \item \textbf{Numa grande instituição bancária, 9\% das pessoas empregadas são programadoras de profissão, 43\% das pessoas empregadas são mulheres e 6\% das mulheres empregadas são programadoras de profissão. Considere que a variável aleatória $ X $ representa o número de pessoas da instituição que são selecionadas, ao acaso e com reposição, até ser detectado pela primeira vez um homem programador de profissão.} 
+  \textbf{Obtenha $ P(X > 5) $.}
+
+  \vspace{0.3cm}
+
+  \begin{mdframed}[backgroundcolor=gray!10, linewidth=0pt, innertopmargin=10pt, innerbottommargin=10pt]
+  \textbf{Resolução:}
+  
+  Defina-se os eventos $P$ e $M$ como sendo, respectivamente, a pessoa ser programadora e a pessoa ser mulher. O enunciado fornece:
+  \begin{align*}
+    P(P) &= 0.09 \\
+    P(M) &= 0.43 \quad \text{(consequentemente, } P(\overline{M}) = 0.57\text{)} \\
+    P(P|M) &= 0.06
+  \end{align*}
+
+  Primeiramente, determine-se a probabilidade de uma pessoa ser homem programador. Utilizando o teorema da probabilidade total:
+  \begin{align*}
+    P(P) &= P(P|M)P(M) + P(P|\overline{M})P(\overline{M}) \\
+    0.09 &= 0.06 \times 0.43 + P(P|\overline{M}) \times 0.57 \\
+    0.09 &= 0.0258 + P(P|\overline{M}) \times 0.57 \\
+    P(P|\overline{M}) &= \frac{0.09 - 0.0258}{0.57} = \frac{0.0642}{0.57} = 0.1126...
+  \end{align*}
+
+  Assim, a probabilidade de selecionar um homem programador é:
+  \begin{align*}
+    p &= P(\overline{M} \cap P) = P(\overline{M}) \times P(P|\overline{M}) = 0.57 \times 0.1126... = 0.0642...
+  \end{align*}
+
+  A variável aleatória $X$ segue uma distribuição geométrica com parâmetro $p = 0.0642...$. Utilizando a função \texttt{GeometricCD} da calculadora Casio fx-CG50 ou pela fórmula:
+  \begin{align*}
+    P(X > 5) &= (1-p)^5 \\
+    &= (1-0.0642...)^5 \\
+    &= (0.9358...)^5 \\
+    &= 0.7177...
+  \end{align*}
+
+  \textbf{Resposta:} A probabilidade de precisar selecionar mais de 5 pessoas até encontrar o primeiro homem programador é aproximadamente 0.72 ou 72\%.
+  \end{mdframed}
+
+  \vspace{0.5cm}
+
+  \item \textbf{Numa produção em série, o número total de peças fabricadas por hora segue uma distribuição de Poisson. A probabilidade de não ser fabricada qualquer peça numa hora é igual a 0.027. Qual é a probabilidade de serem fabricadas 4 peças numa hora, sabendo que foi fabricada pelo menos uma peça nesse período de tempo? Indique o resultado com, pelo menos, quatro casas decimais.}
+
+  \vspace{0.3cm}
+
+  \begin{mdframed}[backgroundcolor=gray!10, linewidth=0pt, innertopmargin=10pt, innerbottommargin=10pt]
+  \textbf{Resolução:}
+  
+  Considere-se a variável aleatória $X$ como o número de peças fabricadas por hora:
+  \begin{align*}
+      X &\sim \text{Poisson}(\lambda)
+  \end{align*}
+  
+  Segundo o enunciado, sabe-se que:
+  \begin{align*}
+      P(X = 0) &= 0.027
+  \end{align*}
+
+  Para determinar o valor de $\lambda$, utilize-se a função de probabilidade da Poisson:
+  \begin{align*}
+      P(X = 0) &= e^{-\lambda} = 0.027 \\
+      \lambda &= -\ln(0.027)
+  \end{align*}
+  
+  Utilizando a função \texttt{ln} da calculadora Casio fx-CG50:
+  \begin{align*}
+      \lambda &\approx 3.6119
+  \end{align*}
+
+  A probabilidade $P(X = 4)$ pode ser calculada utilizando a função \texttt{PoissonPD} da calculadora:
+  \begin{align*}
+      P(X = 4) &= \frac{e^{-\lambda} \times \lambda^4}{4!} \\
+      &= \frac{e^{-3.6119} \times (3.6119)^4}{24} \\
+      &\approx 0.1915
+  \end{align*}
+
+  Aplicando a probabilidade condicional:
+  \begin{align*}
+      P(X = 4 \mid X \geq 1) &= \frac{P(X = 4)}{P(X \geq 1)} \\
+      &= \frac{0.1915}{1 - P(X = 0)} \\
+      &= \frac{0.1915}{1 - 0.027} \\
+      &= \frac{0.1915}{0.973} \\
+      &\approx 0.1968
+  \end{align*}
+
+  \textbf{Resposta:} A probabilidade de serem fabricadas 4 peças numa hora, sabendo que foi fabricada pelo menos uma peça, é 0.1968.
+  \end{mdframed}
+
+  \vspace{0.5cm}
+
+  \item \textbf{A quantidade mensal de certa matéria-prima usada num estaleiro naval é representada pela variável aleatória $X$ com distribuição uniforme contínua com valor esperado 35 e desvio padrão 3. Obtenha $E(50 + 30\sqrt{X})$, o custo mensal esperado de tal matéria-prima. Indique o resultado com pelo menos três casas decimais.}
+
+  \vspace{0.3cm}
+
+  \begin{mdframed}[backgroundcolor=gray!10, linewidth=0pt, innertopmargin=10pt, innerbottommargin=10pt]
+  \textbf{Resolução:}
+  
+  Sabe-se que $X \sim \text{Uniforme}(a, b)$ com $E[X] = 35$ e $\sigma_X = 3$. 
+  
+  Para uma distribuição uniforme, tem-se:
+  \begin{align*}
+      E[X] &= \frac{a + b}{2} = 35 \quad \Rightarrow \quad a + b = 70 \\
+      \text{Var}(X) &= \frac{(b - a)^2}{12} = 9 \\
+      &\Rightarrow (b - a)^2 = 108 \\
+      &\Rightarrow b - a = \sqrt{108} \approx 10.3923
+  \end{align*}
+
+  Resolvendo o sistema para $a$ e $b$:
+  \begin{align*}
+      \begin{cases}
+          a + b = 70 \\
+          b - a \approx 10.3923
+      \end{cases}
+  \end{align*}
+  
+  Utilizando a função \texttt{solve} da calculadora Casio fx-CG50:
+  \begin{align*}
+      b &\approx 40.1962 \\
+      a &\approx 29.8039
+  \end{align*}
+
+  Para calcular $E[\sqrt{X}]$ para $X \sim \text{Uniforme}(a, b)$:
+  \begin{align*}
+      E[\sqrt{X}] &= \frac{1}{b - a} \int_{a}^{b} \sqrt{x} \, dx \\
+      &= \frac{1}{10.3923} \times \left[ \frac{2}{3} x^{3/2} \right]_{a}^{b} \\
+      &= \frac{2}{3 \times 10.3923} \times \left( b^{3/2} - a^{3/2} \right)
+  \end{align*}
+  
+  Calculando com a calculadora Casio fx-CG50:
+  \begin{align*}
+      E[\sqrt{X}] &\approx 5.91063
+  \end{align*}
+
+  O custo esperado é:
+  \begin{align*}
+      E(50 + 30\sqrt{X}) &= 50 + 30 \times E[\sqrt{X}] \\
+      &= 50 + 30 \times 5.91063 \\
+      &\approx 227.319
+  \end{align*}
+
+  \textbf{Resposta:} O custo mensal esperado é 227.319.
+  \end{mdframed}
+
+  \vspace{0.5cm}
+
+  \item \textbf{O tempo de vida de lasers de um dado tipo possui distribuição normal com valor esperado igual a 7197 horas e desvio padrão igual a 609 horas. A probabilidade de o tempo de vida de um desses lasers ser inferior a 5090 horas é:}
+
+  \vspace{0.3cm}
+
+  \begin{mdframed}[backgroundcolor=gray!10, linewidth=0pt, innertopmargin=10pt, innerbottommargin=10pt]
+  \textbf{Resolução:}
+  
+  Considere-se a variável aleatória $X$ como o tempo de vida dos lasers:
+  \begin{align*}
+      X &\sim N(\mu = 7197, \sigma = 609)
+  \end{align*}
+
+  Pretende-se calcular:
+  \begin{align*}
+      P(X < 5090)
+  \end{align*}
+
+  Para isso, padronize-se a variável $X$ calculando o Z-score:
+  \begin{align*}
+      Z &= \frac{X - \mu}{\sigma} \\
+      &= \frac{5090 - 7197}{609} \\
+      &= -3.4599...
+  \end{align*}
+
+  Utilizando a função \texttt{NormalCD} da calculadora Casio fx-CG50:
+  \begin{align*}
+      P(X < 5090) = P(Z < -3.46) &\approx 0.00027
+  \end{align*}
+
+  \textbf{Resposta:} A probabilidade de o tempo de vida de um desses lasers ser inferior a 5090 horas é aproximadamente 0.0003 ou 0.03\%.
+  \end{mdframed}
+\end{enumerate}
+\end{document}
