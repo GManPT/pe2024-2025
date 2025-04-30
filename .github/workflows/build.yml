@@ -1,0 +1,74 @@
+name: Compile LaTeX and Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Get list of tex files
+        id: texfiles
+        run: |
+          series_files=$(ls Series/*.tex | tr '\n' '|')
+          all_files="${series_files}GuiaTeoricoCompleto.tex"
+          echo "::set-output name=files::${all_files%|}"  # remove trailing |
+
+      - name: Compile LaTeX documents
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: ${{ steps.texfiles.outputs.files }}
+
+      - name: Create deployment directory
+        run: mkdir dist
+
+      - name: Move PDFs to deployment directory
+        run: |
+          mv Series/*.pdf dist/
+          mv *.pdf dist/
+
+      - name: Create index.html
+        run: |
+          echo '<!DOCTYPE html>' > dist/index.html
+          echo '<html lang="en">' >> dist/index.html
+          echo '<head>' >> dist/index.html
+          echo '    <meta charset="UTF-8">' >> dist/index.html
+          echo '    <meta name="viewport" content="width=device-width, initial-scale=1.0">' >> dist/index.html
+          echo '    <title>Séries e Resumo Teórico</title>' >> dist/index.html
+          echo '    <style>' >> dist/index.html
+          echo '        body { font-family: Arial, sans-serif; margin: 40px; background-color: #f9f9f9; color: #333; }' >> dist/index.html
+          echo '        h1 { color: #2c3e50; text-align: center; }' >> dist/index.html
+          echo '        h2 { color: #2980b9; margin-top: 30px; }' >> dist/index.html
+          echo '        ul { list-style-type: none; padding: 0; max-width: 600px; margin: 20px auto; }' >> dist/index.html
+          echo '        li { margin: 15px 0; background: #fff; padding: 10px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }' >> dist/index.html
+          echo '        a { text-decoration: none; color: #2980b9; font-weight: bold; }' >> dist/index.html
+          echo '        a:hover { color: #e74c3c; text-decoration: underline; }' >> dist/index.html
+          echo '        p { text-align: center; }' >> dist/index.html
+          echo '    </style>' >> dist/index.html
+          echo '</head>' >> dist/index.html
+          echo '<body>' >> dist/index.html
+          echo '    <h1>Séries Disponíveis</h1>' >> dist/index.html
+          echo '    <ul>' >> dist/index.html
+          for file in dist/Series*.pdf; do
+            base=$(basename $file .pdf)
+            display_name=$(echo $base | sed 's/Series/Série /')
+            echo "        <li><a href=\"${base}.pdf\">${display_name}</a></li>" >> dist/index.html
+          done
+          echo '    </ul>' >> dist/index.html
+          echo '    <h2>Resumo Teórico</h2>' >> dist/index.html
+          echo '    <p><a href="GuiaTeoricoCompleto.pdf">Guia Teórico Completo</a></p>' >> dist/index.html
+          echo '</body>' >> dist/index.html
+          echo '</html>' >> dist/index.html
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: dist
