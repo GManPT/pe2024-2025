@@ -17,14 +17,15 @@ jobs:
       - name: Compile LaTeX documents
         uses: xu-cheng/latex-action@v2
         with:
-          glob_root_file: |
+          root_file: |
             Series/Serie*.tex
             GuiaTeoricoCompleto.tex
+          work_in_root_file_dir: true
           compiler: latexmk
           args: -pdf -file-line-error -halt-on-error -interaction=nonstopmode
 
       - name: Create deployment directory
-        run: mkdir dist
+        run: mkdir -p dist
 
       - name: Move PDFs to deployment directory
         run: |
@@ -33,38 +34,41 @@ jobs:
 
       - name: Create index.html
         run: |
-          echo '<!DOCTYPE html>' > dist/index.html
-          echo '<html lang="en">' >> dist/index.html
-          echo '<head>' >> dist/index.html
-          echo '    <meta charset="UTF-8">' >> dist/index.html
-          echo '    <meta name="viewport" content="width=device-width, initial-scale=1.0">' >> dist/index.html
-          echo '    <title>Séries e Resumo Teórico</title>' >> dist/index.html
-          echo '    <style>' >> dist/index.html
-          echo '        body { font-family: Arial, sans-serif; margin: 40px; background-color: #f9f9f9; color: #333; }' >> dist/index.html
-          echo '        h1 { color: #2c3e50; text-align: center; }' >> dist/index.html
-          echo '        h2 { color: #2980b9; margin-top: 30px; }' >> dist/index.html
-          echo '        ul { list-style-type: none; padding: 0; max-width: 600px; margin: 20px auto; }' >> dist/index.html
-          echo '        li { margin: 15px 0; background: #fff; padding: 10px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }' >> dist/index.html
-          echo '        a { text-decoration: none; color: #2980b9; font-weight: bold; }' >> dist/index.html
-          echo '        a:hover { color: #e74c3c; text-decoration: underline; }' >> dist/index.html
-          echo '        p { text-align: center; }' >> dist/index.html
-          echo '    </style>' >> dist/index.html
-          echo '</head>' >> dist/index.html
-          echo '<body>' >> dist/index.html
-          echo '    <h1>Séries Disponíveis</h1>' >> dist/index.html
-          echo '    <ul>' >> dist/index.html
+          cat << 'EOF' > dist/index.html
+          <!DOCTYPE html>
+          <html lang="pt">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>Séries e Resumo Teórico</title>
+              <style>
+                  body { font-family: Arial, sans-serif; margin: 40px; background-color: #f9f9f9; color: #333; }
+                  h1 { color: #2c3e50; text-align: center; }
+                  h2 { color: #2980b9; margin-top: 30px; }
+                  ul { list-style-type: none; padding: 0; max-width: 600px; margin: 20px auto; }
+                  li { margin: 15px 0; background: #fff; padding: 10px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+                  a { text-decoration: none; color: #2980b9; font-weight: bold; }
+                  a:hover { color: #e74c3c; text-decoration: underline; }
+                  p { text-align: center; }
+              </style>
+          </head>
+          <body>
+              <h1>Séries Disponíveis</h1>
+              <ul>
+          EOF
           for file in dist/Serie*.pdf; do
-            if [ -f "$file" ]; then
-              base=$(basename $file .pdf)
-              display_name=$(echo $base | sed 's/Serie/Série /')
-              echo "        <li><a href=\"${base}.pdf\">${display_name}</a></li>" >> dist/index.html
-            fi
+            [ -f "$file" ] || continue
+            base=$(basename "$file" .pdf)
+            display_name=${base/Serie/Série\ }
+            echo "      <li><a href=\"${base}.pdf\">${display_name}</a></li>" >> dist/index.html
           done
-          echo '    </ul>' >> dist/index.html
-          echo '    <h2>Resumo Teórico</h2>' >> dist/index.html
-          echo '    <p><a href="GuiaTeoricoCompleto.pdf">Guia Teórico Completo</a></p>' >> dist/index.html
-          echo '</body>' >> dist/index.html
-          echo '</html>' >> dist/index.html
+          cat << 'EOF' >> dist/index.html
+              </ul>
+              <h2>Resumo Teórico</h2>
+              <p><a href="GuiaTeoricoCompleto.pdf">Guia Teórico Completo</a></p>
+          </body>
+          </html>
+          EOF
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
