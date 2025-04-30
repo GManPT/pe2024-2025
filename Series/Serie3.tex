@@ -1,0 +1,296 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{titling}   
+\usepackage[portuguese]{babel}
+\usepackage{amsmath} 
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{cancel}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{mdframed}
+\usetikzlibrary{automata, positioning}
+
+\setlength{\droptitle}{-6em}
+\pretitle{\begin{center}\LARGE}
+\posttitle{\par\end{center}}
+\preauthor{\begin{center}\large}
+\postauthor{\end{center}} 
+\predate{\begin{center}\large} 
+\postdate{\end{center}} 
+
+\author{Series de Problemas 3}
+
+\begin{document}
+
+\title{Probabilidade e Estatística}
+\date{30 de Abril de 2025}
+\maketitle
+
+\begin{enumerate}
+  \item \textbf{Um pequeno ferryboat transporta veículos de tipos A e B. Considere que 
+  $X$ e $Y$ representam o número de veículos de tipos A e B transportados por viagem (respectivamente). Admita que o par aleatório 
+  $(X, Y)$ possui função de probabilidade conjunta:}
+
+  \vspace{0.3cm}
+
+  \begin{center}
+    \small                      % texto menor para a tabela
+    \renewcommand{\arraystretch}{1.8}  % altura de linha moderada
+    \setlength{\tabcolsep}{12pt}       % espaçamento horizontal ajustado
+    \begin{tabular}{|c|c|c|c|}
+      \hline
+      X \(\backslash\) Y & 0 & 1 & 2 \\ \hline
+      0 & $\frac{3}{40}$ & $\frac{1}{8}$   & $\frac{2}{15}$ \\ \hline
+      1 & $\frac{2}{15}$ & $\frac{3}{40}$ & $\frac{1}{8}$   \\ \hline
+      2 & $\frac{1}{8}$  & $\frac{2}{15}$ & $\frac{3}{40}$ \\ \hline
+    \end{tabular}
+  \end{center}
+
+  \textbf{Determine o valor da função de distribuição marginal de $Y$ no ponto $0.74$.}
+
+  \vspace{0.3cm}
+
+  \begin{mdframed}[backgroundcolor=gray!10, linewidth=0pt, innertopmargin=10pt, innerbottommargin=10pt]
+  \textbf{Resolução:}
+  
+  Para determinar o valor da função de distribuição marginal de $Y$ no ponto $0.74$, calcule-se a probabilidade acumulada $P(Y \leq 0.74)$. Observe-se que, como $Y$ é uma variável aleatória discreta que assume apenas os valores $0$, $1$ e $2$, tem-se:
+  
+  \begin{center}
+  $F_Y(0,74) = P(Y \leq 0,74) = P(Y = 0).$
+  \end{center}
+
+  A probabilidade marginal $P(Y = 0)$ é obtida somando as probabilidades conjuntas para $Y = 0$ em todos os valores de $X$:
+
+  \begin{align*}
+    P(Y = 0) &= P(X = 0, Y = 0) + P(X = 1, Y = 0) + P(X = 2, Y = 0) \\
+             &= \frac{3}{40} + \frac{2}{15} + \frac{1}{8}
+  \end{align*}
+  
+  \textbf{Resposta:} O valor da função de distribuição marginal de $Y$ no ponto $0,74$ é $\frac{1}{3}$.
+  \end{mdframed}
+
+  \vspace{0.5cm}
+
+  \item \textbf{Considere o par aleatório \( (X, Y) \) com a seguinte função de probabilidade conjunta:} 
+
+  \vspace{0.3cm}
+
+  \begin{center}
+    \small                      
+    \renewcommand{\arraystretch}{1.8}
+    \setlength{\tabcolsep}{12pt}
+    \begin{tabular}{|c|c|c|}
+      \hline
+      \( X \setminus Y \) & 0 & 4 \\ \hline
+      -2 & \(\frac{1}{8}\) & 0 \\ \hline
+      0 & \(\frac{1}{8}\) & \(\frac{1}{8}\) \\ \hline
+      2 & \(\frac{1}{4}\) & \(\frac{1}{4}\) \\ \hline
+      4 & 0 & \(\frac{1}{8}\) \\ \hline
+    \end{tabular}
+  \end{center}
+
+  \textbf{Calcule \( E\left( Y^2 \middle| X \leq 0.8 \right) \). Indique o resultado com pelo menos quatro casas decimais.}
+
+  \vspace{0.3cm}
+
+  \begin{mdframed}[backgroundcolor=gray!10, linewidth=0pt, innertopmargin=10pt, innerbottommargin=10pt]
+  \textbf{Resolução:}
+  
+  Note-se que a condição \( X \leq 0.8 \) inclui os valores \( X = -2 \) e \( X = 0 \). 
+  
+  Primeiramente, calcule-se a probabilidade total do evento condicionante:
+  \begin{align*}
+    P(X \leq 0.8) &= P(X = -2) + P(X = 0) \\
+    &= \left(\frac{1}{8} + 0\right) + \left(\frac{1}{8} + \frac{1}{8}\right) \\
+    &= \frac{3}{8}
+  \end{align*}
+
+  Em seguida, calcule-se \( E(Y^2 \cdot I_{\{X \leq 0.8\}}) \), onde \( I_{\{X \leq 0.8\}} \) é a função indicadora:
+  \begin{align*}
+    E(Y^2 \cdot I_{\{X \leq 0.8\}}) &= \sum_{x \leq 0.8} \sum_{y} 
+    y^2 \cdot P(X = x, Y = y) \\
+    &= \left( \sum_{y} y^2 \cdot P(X = -2, Y = y) \right) \\
+    &\quad + \left( \sum_{y} y^2 \cdot P(X = 0, Y = y) \right) \\
+    &= \left( 0^2 \cdot \frac{1}{8} + 4^2 \cdot 0 \right) \\
+    &\quad + \left( 0^2 \cdot \frac{1}{8} + 4^2 \cdot \frac{1}{8} \right) \\
+    &= \left( 0 + 0 \right) + \left( 0 + 16 \cdot \frac{1}{8} \right) \\
+    &= 2
+  \end{align*}
+
+  Finalmente, a esperança condicional é dada por:
+  \begin{align*}
+    E(Y^2 \mid X \leq 0.8) &= \frac{E(Y^2 \cdot I_{\{X \leq 0.8\}})}{P(X \leq 0.8)} \\
+    &= \frac{2}{\frac{3}{8}} \\
+    &= \frac{16}{3} \approx 5.3333
+  \end{align*}
+
+  \textbf{Resposta:} O valor de \( E\left( Y^2 \middle| X \leq 0.8 \right) \) é 5.3333.
+  \end{mdframed}
+
+  \vspace{0.5cm}
+
+  \item \textbf{Seja \( X \) (respetivamente, \( Y \)) a variável aleatória que descreve o índice de capacidade de carga do pneu dianteiro (respetivamente traseiro) de um carro novo. Admita que o par aleatório \((X, Y)\) possui função de probabilidade conjunta dada por:}
+
+  \vspace{0.3cm}
+
+  \begin{center}
+    \small
+    \renewcommand{\arraystretch}{1.8}  % altura de linha moderada
+    \setlength{\tabcolsep}{12pt}       % espaçamento horizontal ajustado
+    \begin{tabular}{|c|c|c|c|}
+      \hline
+      \( X \setminus Y \) & 52 & 54 & 55 \\ \hline
+      56 & $\frac{87}{1000}$ & $\frac{239}{1500}$ & $\frac{87}{1000}$ \\ \hline
+      58 & $\frac{87}{1000}$ & $\frac{87}{1000}$ & $\frac{239}{1500}$ \\ \hline
+      60 & $\frac{239}{1500}$ & $\frac{87}{1000}$ & $\frac{87}{1000}$ \\ \hline
+    \end{tabular}
+  \end{center}
+
+  \textbf{Calcule o valor esperado de \( X + Y \) condicional a \( Y = 55 \). Indique o resultado com pelo menos quatro casas decimais.}
+
+  \vspace{0.3cm}
+
+  \begin{mdframed}[backgroundcolor=gray!10, linewidth=0pt, innertopmargin=10pt, innerbottommargin=10pt]
+  \textbf{Resolução:}
+  
+  Para calcular \( E(X + Y \mid Y = 55) \), utilize-se a propriedade da esperança condicional:
+  \begin{align*}
+    E(X + Y \mid Y = 55) = E(X \mid Y = 55) + E(Y \mid Y = 55)
+  \end{align*}
+
+  Observe-se que \( Y = 55 \) é uma condição determinística, logo \( E(Y \mid Y = 55) = 55 \). 
+  
+  Resta calcular \( E(X \mid Y = 55) \). Primeiramente, determine-se a probabilidade marginal \( P(Y = 55) \):
+  \begin{align*}
+    P(Y = 55) &= \frac{87}{1000} + \frac{239}{1500} + \frac{87}{1000} \\
+    &= \frac{1}{3}
+  \end{align*}
+
+  As probabilidades condicionais \( P(X = x \mid Y = 55) \) são:
+  \begin{align*}
+    P(X = 56 \mid Y = 55) &= \frac{P(X = 56, Y = 55)}{P(Y = 55)} = 
+    \frac{\frac{87}{1000}}{\frac{1}{3}} = \frac{261}{1000} \\
+    P(X = 58 \mid Y = 55) &= \frac{P(X = 58, Y = 55)}{P(Y = 55)} = 
+    \frac{\frac{239}{1500}}{\frac{1}{3}} = \frac{717}{1500} \\
+    P(X = 60 \mid Y = 55) &= \frac{P(X = 60, Y = 55)}{P(Y = 55)} = 
+    \frac{\frac{87}{1000}}{\frac{1}{3}} = \frac{261}{1000}
+  \end{align*}
+
+  Calcule-se \( E(X \mid Y = 55) \):
+  \begin{align*}
+    E(X \mid Y = 55) &= 56 \cdot P(X = 56 \mid Y = 55) \\ 
+    &\quad + 58 \cdot P(X = 58 \mid Y = 55) \\
+    &\quad + 60 \cdot P(X = 60 \mid Y = 55) \\
+    &= 56 \cdot 0.261 + 58 \cdot 0.478 + 60 \cdot 0.261 \\
+    &= 14.616 + 27.724 + 15.660 \\
+    &= 58.000
+  \end{align*}
+
+  Finalmente:
+  \begin{align*}
+    E(X + Y \mid Y = 55) &= E(X \mid Y = 55) + E(Y \mid Y = 55) \\
+    &= 58.000 + 55.000 \\
+    &= 113.0000
+  \end{align*}
+
+  \textbf{Resposta:} O valor esperado de \( X + Y \) condicional a \( Y = 55 \) é 113.0000.
+  \end{mdframed}
+
+  \vspace{0.5cm}
+
+  \item \textbf{Admita que uma lente escolhida ao acaso da produção de um pequeno laboratório de óptica e optometria possui deformação com probabilidade \( p = 0.05 \), independentemente das restantes lentes.}
+
+  \textbf{Qual a probabilidade de serem detetadas exatamente 2 lentes com deformação ao serem examinadas as lentes produzidas de modo independente e provenientes de três turnos horários responsáveis pela produção de 4, 6 e 2 lentes?}
+
+  \vspace{0.3cm}
+
+  \begin{mdframed}[backgroundcolor=gray!10, linewidth=0pt, innertopmargin=10pt, innerbottommargin=10pt]
+  \textbf{Resolução:}
+  
+  Observe-se que o número total de lentes produzidas é \( 4 + 6 + 2 = 12 \). 
+  
+  Defina-se a variável aleatória \( X \) como o número de lentes defeituosas entre as 12 examinadas. Como a probabilidade de uma lente ter defeito é \( p = 0.05 \) e as lentes são independentes, \( X \) segue uma distribuição binomial:
+  \begin{align*}
+    X \sim \text{Bin}(n = 12, p = 0.05)
+  \end{align*}
+  
+  A probabilidade de exatamente 2 lentes defeituosas é dada por:
+  \begin{align*}
+    P(X = 2) &= \binom{12}{2} \cdot (0.05)^2 \cdot (0.95)^{10}
+  \end{align*}
+  
+  \textbf{Resposta:} A probabilidade de serem detetadas exatamente 2 lentes com deformação é 0.0987.
+  \end{mdframed}
+
+  \vspace{0.5cm}
+
+  \item \textbf{Admita que os tempos (em horas) de reparação de reguladores de tensão elétrica de automóveis são variáveis aleatórias independentes e identicamente distribuídas à variável aleatória \( X \) com valor esperado \( E(X) = \frac{2}{a} \) e segundo momento \( E(X^2) = \frac{24}{a^2} \), onde \( a = 1.1 \).}
+  
+  \textbf{Obtenha um valor aproximado para a probabilidade de o tempo total de reparação de 64 desses reguladores pertencer ao intervalo \([98,9; 110,5]\).}
+  
+  \textbf{Indique o resultado com pelo menos quatro casas decimais.}
+
+  \vspace{0.3cm}
+
+  \begin{mdframed}[backgroundcolor=gray!10, linewidth=0pt, innertopmargin=10pt, innerbottommargin=10pt]
+  \textbf{Resolução:}
+  
+  Primeiro, calcule-se a média e variância de \( X \). Dado \( a = 1.1 \):
+  \begin{align*}
+    E(X) &= \frac{2}{a} = \frac{2}{1.1} \\
+    &\approx 1.8182
+  \end{align*}
+  
+  Para a variância, utilize-se a relação:
+  \begin{align*}
+    \text{Var}(X) &= E(X^2) - [E(X)]^2 \\
+    &= \frac{24}{a^2} - \left(\frac{2}{a}\right)^2 \\
+    &= \frac{24}{a^2} - \frac{4}{a^2} \\
+    &= \frac{20}{a^2} \\
+    &= \frac{20}{(1.1)^2} \\
+    &\approx 16.5289
+  \end{align*}
+
+  Para 64 reguladores, o tempo total \( T \) tem média e variância:
+  \begin{align*}
+    \mu_T &= 64 \cdot E(X) = 64 \cdot 1.8182 \\
+    &\approx 116.3648 \\
+    \sigma_T^2 &= 64 \cdot \text{Var}(X) = 64 \cdot 16.5289 \\
+    &\approx 1057.8496
+  \end{align*}
+  
+  O desvio padrão é:
+  \begin{align*}
+    \sigma_T &= \sqrt{1057.8496} \\
+    &\approx 32.5246
+  \end{align*}
+
+  Pelo Teorema Central do Limite, para um grande número de observações (64 é suficientemente grande), a soma das variáveis aleatórias independentes e identicamente distribuídas aproxima-se de uma distribuição normal. Assim, \( T \) segue aproximadamente uma distribuição \( \mathcal{N}(116.3648, 32.5246^2) \).
+
+  Para calcular \( P(98,9 \leq T \leq 110,5) \), padronize-se a variável:
+  \begin{align*}
+    Z_{\text{inf}} &= \frac{98.9 - 116.3648}{32.5246} \\
+    &\approx -0.537 \\
+    Z_{\text{sup}} &= \frac{110.5 - 116.3648}{32.5246} \\
+    &\approx -0.180
+  \end{align*}
+
+  Utilizando a função \texttt{NormalCD} da calculadora Casio fx-CG50:
+  \begin{align*}
+    P(Z \leq -0,180) &\approx 0,4284 \\
+    P(Z \leq -0,537) &\approx 0,2955
+  \end{align*}
+
+  Assim, a probabilidade aproximada é:
+  \begin{align*}
+    P(98,9 \leq T \leq 110,5) &= P(-0,537 \leq Z \leq -0,180) \\
+    &= 0,4284 - 0,2955 \\
+    &= 0,1329
+  \end{align*}
+
+  \textbf{Resposta:} A probabilidade aproximada de o tempo total de reparação pertencer ao intervalo \([98,9; 110,5]\) é 0,1329.
+  \end{mdframed}
+\end{enumerate}
+\end{document}
