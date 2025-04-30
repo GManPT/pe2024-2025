@@ -14,15 +14,22 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Find all LaTeX root files
+        id: find_tex
+        run: |
+          echo "files<<EOF" >> $GITHUB_OUTPUT
+          find Series -name 'Serie*.tex' >> $GITHUB_OUTPUT
+          echo "GuiaTeoricoCompleto.tex" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
       - name: Compile LaTeX documents
         uses: xu-cheng/latex-action@v2
         with:
-          root_file: |
-            Series/Serie*.tex
-            GuiaTeoricoCompleto.tex
+          root_file: ${{ steps.find_tex.outputs.files }}
           work_in_root_file_dir: true
           compiler: latexmk
           args: -pdf -file-line-error -halt-on-error -interaction=nonstopmode
+
 
       - name: Create deployment directory
         run: mkdir -p dist
