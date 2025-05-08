@@ -1,0 +1,129 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{titling}   
+\usepackage[portuguese]{babel}
+\usepackage{amsmath} 
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{cancel}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{mdframed}
+\usetikzlibrary{automata, positioning}
+
+\setlength{\droptitle}{-6em}
+\pretitle{\begin{center}\LARGE}
+\posttitle{\par\end{center}}
+\preauthor{\begin{center}\large}
+\postauthor{\end{center}} 
+\predate{\begin{center}\large} 
+\postdate{\end{center}} 
+
+\author{Series de Problemas 4}
+
+\begin{document}
+
+\title{Probabilidade e Estatística}
+\date{08 de Maio de 2025}
+\maketitle
+
+\begin{enumerate}
+    \item \textbf{Admita que o número de programas examinados de modo independente até que se observe o primeiro programa que não compile é representado pela variável aleatória \( X \) com distribuição geométrica com parâmetro \( p \), onde \( p \) é uma probabilidade desconhecida. Determine a estimativa de máxima verosimilhança de \( p \), atendendo à amostra \( (4, 5, 13, 30) \) proveniente da população \( X \).}
+
+    \vspace{0.3cm}
+
+    \begin{mdframed}[backgroundcolor=gray!10, linewidth=0pt, innertopmargin=10pt, innerbottommargin=10pt]
+    \textbf{Resolução:}
+
+    Considere-se a variável aleatória $X \sim \text{Geom}(p)$ que representa o número de programas examinados até observar o primeiro que não compile, incluindo este. A função de probabilidade da distribuição geométrica é:
+    \begin{align*}
+    P(X = x) = (1 - p)^{x - 1} p, \quad x = 1, 2, 3, \ldots
+    \end{align*}
+
+    Para a amostra $(x_1, x_2, x_3, x_4) = (4, 5, 13, 30)$, a função de verosimilhança é:
+    \begin{align*}
+    L(p) &= \prod_{i=1}^4 P(X = x_i) \\
+    &= \prod_{i=1}^4 (1 - p)^{x_i - 1} p \\
+    &= p^4 \times (1 - p)^{\sum_{i=1}^4 (x_i - 1)} \\
+    &= p^4 \times (1 - p)^{48}
+    \end{align*}
+
+    Para maximizar a verosimilhança, aplique-se o logaritmo natural:
+    \begin{align*}
+    \ell(p) &= \log L(p) \\
+    &= \log \left( p^4 \times (1 - p)^{48} \right) \\
+    &= 4 \log p + 48 \log(1-p)
+    \end{align*}
+
+    Derive-se $\ell(p)$ em relação a $p$:
+    \begin{align*}
+    \frac{d\ell}{dp} &= \frac{d}{dp} \left( 4 \log p + 48 \log(1-p) \right) \\
+    &= \frac{4}{p} + 48 \cdot \frac{1}{1-p} \cdot (-1) \\
+    &= \frac{4}{p} - \frac{48}{1-p}
+    \end{align*}
+
+    Igualando a derivada a zero para encontrar o valor de $p$ que maximiza $\ell(p)$:
+    \begin{align*}
+    \frac{4}{p} - \frac{48}{1-p} &= 0 \\
+    \frac{4}{p} &= \frac{48}{1-p} \\
+    4(1-p) &= 48p \\
+    4 - 4p &= 48p \\
+    4 &= 52p \\
+    p &= \frac{4}{52} = \frac{1}{13} \approx 0.0769
+    \end{align*}
+
+    \textbf{Resposta:} A estimativa de máxima verosimilhança de $p$ é $\frac{1}{13} \approx 0.0769$.
+    \end{mdframed}
+
+    \vspace{0.5cm}
+
+    \item \textbf{Tem-se assumido que o impacto hidrodinâmico (com valores medidos em unidades apropriadas), \( X \) do casco de um navio sobre uma onda em determinada região do globo possui função de densidade de probabilidade dada por}
+    \[
+    f(x) = \left| \frac{2x}{\lambda^2} \right| e^{-\frac{x^2}{\lambda^2}},
+    \]
+    \textbf{onde \( x > 0 \) e o parâmetro \( \lambda \) é uma constante positiva desconhecida. Tendo por base uma amostra aleatória \( (X_1, X_2, \ldots, X_{13}) \) de \( X \) com \( n = 13 \), determine a estimativa de máxima verosimilhança do parâmetro \( \lambda \) para uma realização da amostra tal que \( \sum_{i=1}^{13} x_i^2 = 62 \).}
+
+    \vspace{0.3cm}
+
+    \begin{mdframed}[backgroundcolor=gray!10, linewidth=0pt, innertopmargin=10pt, innerbottommargin=10pt]
+    \textbf{Resolução:}
+
+    Comece-se por observar que a função de densidade fornecida pode ser reescrita, já que \( x > 0 \), como:
+    \[
+    f(x) = \frac{2x}{\lambda^2} e^{-\frac{x^2}{\lambda^2}}, \quad x > 0
+    \]
+
+    Trata-se da distribuição de Rayleigh generalizada. A função de verosimilhança para uma amostra \( (x_1, x_2, \ldots, x_n) \) é dada por:
+    \[
+    L(\lambda) = \prod_{i=1}^n \frac{2x_i}{\lambda^2} e^{-\frac{x_i^2}{\lambda^2}} = \left( \frac{2^n}{\lambda^{2n}} \prod_{i=1}^n x_i \right) \cdot e^{-\frac{1}{\lambda^2} \sum x_i^2}
+    \]
+
+    Passe-se à log-verosimilhança:
+    \[
+    \ell(\lambda) = \log L(\lambda) = n \log 2 - 2n \log \lambda + \sum_{i=1}^n \log x_i - \frac{1}{\lambda^2} \sum x_i^2
+    \]
+
+    Derivando em relação a \( \lambda \) e igualando a zero:
+    \begin{align*}
+    \frac{d\ell}{d\lambda} &= -\frac{2n}{\lambda} + \frac{2}{\lambda^3} \sum x_i^2 = 0 \\
+    \Rightarrow -2n\lambda^2 + 2 \sum x_i^2 &= 0 \\
+    \Rightarrow \lambda^2 &= \frac{1}{n} \sum x_i^2 \\
+    \Rightarrow \hat{\lambda} &= \sqrt{ \frac{1}{n} \sum x_i^2 }
+    \end{align*}
+
+    Apliquemos agora à amostra fornecida:
+    \begin{align*}
+    n &= 13 \\
+    \sum x_i^2 &= 62 \\
+    \hat{\lambda} &= \sqrt{ \frac{62}{13} } = \sqrt{4.7692} \approx 2.1839
+    \end{align*}
+
+    \textbf{Resposta:} A estimativa de máxima verosimilhança de \( \lambda \) é \( 2{,}18 \) (com duas casas decimais).
+    \end{mdframed}
+
+
+    
+\end{enumerate}
+
+\end{document}
