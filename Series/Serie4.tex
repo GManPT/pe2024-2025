@@ -10,6 +10,7 @@
 \usepackage{array}
 \usepackage{booktabs}
 \usepackage{mdframed}
+\usepackage{enumitem}
 \usetikzlibrary{automata, positioning}
 
 \setlength{\droptitle}{-6em}
@@ -95,35 +96,223 @@
     \]
 
     Trata-se da distribuição de Rayleigh generalizada. A função de verosimilhança para uma amostra \( (x_1, x_2, \ldots, x_n) \) é dada por:
-    \[
-    L(\lambda) = \prod_{i=1}^n \frac{2x_i}{\lambda^2} e^{-\frac{x_i^2}{\lambda^2}} = \left( \frac{2^n}{\lambda^{2n}} \prod_{i=1}^n x_i \right) \cdot e^{-\frac{1}{\lambda^2} \sum x_i^2}
-    \]
+    \begin{align*}
+    L(\lambda) &= \prod_{i=1}^n \frac{2x_i}{\lambda^2} e^{-\frac{x_i^2}{\lambda^2}} \\
+    &= \left( \frac{2^n}{\lambda^{2n}} \prod_{i=1}^n x_i \right) \cdot e^{-\frac{1}{\lambda^2} \sum_{i=1}^n x_i^2}
+    \end{align*}
 
     Passe-se à log-verosimilhança:
-    \[
-    \ell(\lambda) = \log L(\lambda) = n \log 2 - 2n \log \lambda + \sum_{i=1}^n \log x_i - \frac{1}{\lambda^2} \sum x_i^2
-    \]
+    \begin{align*}
+    \ell(\lambda) &= \log L(\lambda) \\
+    &= n \log 2 - 2n \log \lambda + \sum_{i=1}^n \log x_i - \frac{1}{\lambda^2} \sum_{i=1}^n x_i^2
+    \end{align*}
 
     Derivando em relação a \( \lambda \) e igualando a zero:
     \begin{align*}
-    \frac{d\ell}{d\lambda} &= -\frac{2n}{\lambda} + \frac{2}{\lambda^3} \sum x_i^2 = 0 \\
-    \Rightarrow -2n\lambda^2 + 2 \sum x_i^2 &= 0 \\
-    \Rightarrow \lambda^2 &= \frac{1}{n} \sum x_i^2 \\
-    \Rightarrow \hat{\lambda} &= \sqrt{ \frac{1}{n} \sum x_i^2 }
+    \frac{d\ell}{d\lambda} &= -\frac{2n}{\lambda} + \frac{2}{\lambda^3} \sum_{i=1}^n x_i^2 = 0 \\
+    \Rightarrow -2n\lambda^2 + 2 \sum_{i=1}^n x_i^2 &= 0 \\
+    \Rightarrow \lambda^2 &= \frac{1}{n} \sum_{i=1}^n x_i^2 \\
+    \Rightarrow \hat{\lambda} &= \sqrt{\frac{1}{n} \sum_{i=1}^n x_i^2}
     \end{align*}
 
     Apliquemos agora à amostra fornecida:
     \begin{align*}
     n &= 13 \\
-    \sum x_i^2 &= 62 \\
-    \hat{\lambda} &= \sqrt{ \frac{62}{13} } = \sqrt{4.7692} \approx 2.1839
+    \sum_{i=1}^n x_i^2 &= 62 \\
+    \hat{\lambda} &= \sqrt{\frac{62}{13}} = \sqrt{4.7692} \approx 2.1839
     \end{align*}
 
     \textbf{Resposta:} A estimativa de máxima verosimilhança de \( \lambda \) é \( 2{,}18 \) (com duas casas decimais).
     \end{mdframed}
 
+    \vspace{0.5cm}
 
+    \item \textbf{Considere a variável aleatória \( X \sim \text{Poi}(\lambda) \), que modela o número de participações de sinistros automóveis a determinada seguradora num período de uma hora, e uma amostra aleatória \((X_1, X_2, \ldots, X_n)\) de \(X\). Calcule a estimativa de máxima verosimilhança da probabilidade de ocorrerem mais de 3 participações de sinistros automóveis às seguradoras numa hora, sabendo que a concretização de uma amostra aleatória de dimensão 22 de \(X\) conduziu a}  
+    \[
+    \sum_{i=1}^{22} x_i = 42.
+    \]
+
+    \begin{enumerate}[label=\alph*)]
+        \item \textbf{0.126856}
+        \item \textbf{0.873144}
+        \item \textbf{0.002071}
+        \item \textbf{0.983743}
+    \end{enumerate}
+
+    \vspace{0.3cm}
+
+    \begin{mdframed}[backgroundcolor=gray!10, linewidth=0pt, innertopmargin=10pt, innerbottommargin=10pt]
+    \textbf{Resolução:}
+
+    Comece-se por recordar que a esperança da distribuição de Poisson é dada por \( E(X) = \lambda \). Assim, a estimativa de máxima verosimilhança (EMV) de \( \lambda \), com base na amostra de dimensão \( n = 22 \) e soma dos valores observados igual a 42, é:
+    \[
+    \hat{\lambda} = \frac{1}{n} \sum_{i=1}^{n} x_i = \frac{42}{22} \approx 1.9091
+    \]
+
+    Pretende-se estimar a probabilidade de ocorrerem mais de 3 sinistros numa hora, ou seja:
+    \[
+    P(X > 3) = 1 - P(X \leq 3)
+    \]
+
+    Com \( X \sim \text{Poi}(\hat{\lambda}) = \text{Poi}(1.9091) \), utilizando a função \texttt{PoissonCD} da calculadora Casio fx-CG50, obtém-se:
+    \[
+    P(X \leq 3) \approx 0.8731
+    \]
+
+    Portanto:
+    \[
+    P(X > 3) = 1 - 0.8731 = 0.1269
+    \]
+
+    Arredondando com seis casas decimais, temos:
+    \[
+    \boxed{0.126856}
+    \]
+
+    \textbf{Resposta correta:} a) \textbf{0.126856}
+    \end{mdframed}
+
+    \vspace{0.5cm}
+
+    \item \textbf{Admita que o tempo de vida em centenas de horas, \( X \), de um novo tipo de lâmpadas de longa duração segue uma distribuição exponencial cujo parâmetro \( \lambda \) é uma constante desconhecida e positiva. Com o objetivo de estimar \( \lambda \), registaram-se as durações de lâmpadas deste tipo, tendo-se obtido a seguinte amostra: \( (91, 81, 102, 72, 120) \). Calcule a estimativa de máxima verosimilhança da probabilidade de uma lâmpada desse tipo durar mais de 50 centenas de horas.}
+
+    \vspace{0.3cm}
+
+    \begin{enumerate}[label=\alph*)]
+        \item \textbf{0.4922}
+        \item \textbf{0.7504}
+        \item \textbf{0.5848}
+        \item \textbf{0.6758}
+    \end{enumerate}
+
+    \vspace{0.3cm}
+
+    \begin{mdframed}[backgroundcolor=gray!10, linewidth=0pt, innertopmargin=10pt, innerbottommargin=10pt]
+    \textbf{Resolução:}
+
+    Comecemos por lembrar que a função de densidade da distribuição exponencial é dada por:
+    \[
+    f(x; \lambda) = \lambda e^{-\lambda x}, \quad x > 0
+    \]
+
+    A função de verosimilhança para uma amostra \( (x_1, x_2, \ldots, x_n) \) é:
+    \begin{align*}
+    L(\lambda) &= \prod_{i=1}^n \lambda e^{-\lambda x_i} \\
+    &= \lambda^n e^{-\lambda \sum_{i=1}^n x_i}
+    \end{align*}
+
+    Passando à log-verosimilhança:
+    \begin{align*}
+    \ell(\lambda) &= \log L(\lambda) \\
+    &= n \log \lambda - \lambda \sum_{i=1}^n x_i
+    \end{align*}
+
+    Derivando em relação a \( \lambda \) e igualando a zero:
+    \begin{align*}
+    \frac{d\ell}{d\lambda} &= \frac{n}{\lambda} - \sum_{i=1}^n x_i = 0 \\
+    \Rightarrow \frac{n}{\lambda} &= \sum_{i=1}^n x_i \\
+    \Rightarrow \hat{\lambda} &= \frac{n}{\sum_{i=1}^n x_i}
+    \end{align*}
+
+    Note-se que esta é a expressão do estimador de máxima verosimilhança para o parâmetro \( \lambda \) da distribuição exponencial. Alternativamente, sabendo que \( E(X) = \frac{1}{\lambda} \), temos \( \hat{\lambda} = \frac{1}{\bar{x}} \).
+
+    Dada a amostra \( (91, 81, 102, 72, 120) \), com \( n = 5 \), calcule-se:
+    \begin{align*}
+    \sum_{i=1}^n x_i &= 91 + 81 + 102 + 72 + 120 = 466 \\
+    \hat{\lambda} &= \frac{5}{466} \approx 0.0107296
+    \end{align*}
+
+    Para uma variável aleatória exponencial, a probabilidade de ultrapassar um valor \( t \) é dada por:
+    \begin{align*}
+    P(X > t) &= e^{-\lambda t}
+    \end{align*}
+
+    Assim, a estimativa de máxima verosimilhança da probabilidade de uma lâmpada durar mais de 50 centenas de horas é:
+    \begin{align*}
+    P(X > 50) &= e^{-\hat{\lambda} \cdot 50} \\
+    &= e^{-0.0107296 \cdot 50} \\
+    &= e^{-0.53648} \\
+    &\approx 0.5848
+    \end{align*}
+
+    \textbf{Resposta correta:} c) \textbf{0.5848}
+    \end{mdframed}
+
+    \vspace{0.5cm}
     
+    \item \textbf{Admita que a proporção de potássio em certo fertilizante é representada pela variável aleatória \( X \) com função de densidade de probabilidade}
+    \[
+    f_X(x) = 
+    \begin{cases} 
+    \theta(1 - x)^{\theta-1} & 0 < x < 1 \\ 
+    0 & \text{caso contrário,}
+    \end{cases}
+    \]
+    \textbf{onde \( \theta \) é um parâmetro positivo desconhecido. Determine a estimativa de máxima verosimilhança de \( P(X \leq 0{,}12) \) baseada na amostra \( (0.666, 0.117, 0.167, 0.57, 0.106, 0.095) \) proveniente da população \( X \).}
+
+    \vspace{0.3cm}
+
+    \begin{mdframed}[backgroundcolor=gray!10, linewidth=0pt, innertopmargin=10pt, innerbottommargin=10pt]
+    \textbf{Resolução:}
+
+    Observe-se que a função densidade corresponde a uma distribuição Beta(1, \( \theta \)), também conhecida como distribuição de potência. A função de verosimilhança para a amostra \( (x_1, x_2, \dots, x_n) \) é dada por:
+    \begin{align*}
+    L(\theta) &= \prod_{i=1}^{n} \theta (1 - x_i)^{\theta - 1} \\
+    &= \theta^n \cdot \prod_{i=1}^{n} (1 - x_i)^{\theta - 1}
+    \end{align*}
+
+    Tomando o logaritmo para facilitar a maximização:
+    \begin{align*}
+    \ell(\theta) &= \log L(\theta) \\
+    &= n \log \theta + (\theta - 1) \sum_{i=1}^{n} \log(1 - x_i)
+    \end{align*}
+
+    Derivando em relação a \( \theta \) e igualando a zero:
+    \begin{align*}
+    \frac{d\ell}{d\theta} &= \frac{n}{\theta} + \sum_{i=1}^{n} \log(1 - x_i) = 0 \\
+    \Rightarrow \frac{n}{\theta} &= -\sum_{i=1}^{n} \log(1 - x_i) \\
+    \Rightarrow \hat{\theta} &= -\frac{n}{\sum_{i=1}^{n} \log(1 - x_i)}
+    \end{align*}
+
+    Com a amostra fornecida \( (0.666, 0.117, 0.167, 0.57, 0.106, 0.095) \), calcule-se:
+    \begin{align*}
+    \sum_{i=1}^{n} \log(1 - x_i) &= \log(0.334) + \log(0.883) + \log(0.833) \\
+    &+ \log(0.43) + \log(0.894) + \log(0.905) \\
+    &\approx -1.0961 -0.1247 -0.1829 -0.8440 -0.1114 -0.0997 \\
+    &= -2.4596
+    \end{align*}
+
+    Assim, a estimativa de máxima verosimilhança do parâmetro é:
+    \begin{align*}
+    \hat{\theta} &= -\frac{6}{-2.4588} \\
+    &\approx 2.4394
+    \end{align*}
+
+    Agora, para calcular \( P(X \leq 0.12) \) com o parâmetro estimado:
+    \begin{align*}
+    P(X \leq 0.12) &= \int_0^{0.12} \hat{\theta}(1 - x)^{\hat{\theta} - 1} dx
+    \end{align*}
+
+    Utilizando a substituição \( u = 1 - x \Rightarrow du = -dx \), mudando os limites:
+    \begin{align*}
+    x = 0 &\Rightarrow u = 1 \\
+    x = 0.12 &\Rightarrow u = 0.88
+    \end{align*}
+
+    Com esta substituição, o integral torna-se:
+    \begin{align*}
+    P(X \leq 0.12) &= \int_{0.88}^{1} \hat{\theta} u^{\hat{\theta} - 1} (-du) \\
+    &= \int_{1}^{0.88} -\hat{\theta} u^{\hat{\theta} - 1} du \\
+    &= \left[ -u^{\hat{\theta}} \right]_{1}^{0.88} \\
+    &= -0.88^{\hat{\theta}} - (-1^{\hat{\theta}}) \\
+    &= 1 - 0.88^{2.44} \\
+    &\approx 1 - 0.7321 \\
+    &= 0.2679
+    \end{align*}
+
+    \textbf{Resposta:} A estimativa de máxima verosimilhança de \( P(X \leq 0{,}12) \) é aproximadamente 0.2679.
+    \end{mdframed}
+
 \end{enumerate}
 
 \end{document}
