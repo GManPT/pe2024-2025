@@ -276,10 +276,12 @@
 
     Com a amostra fornecida \( (0.666, 0.117, 0.167, 0.57, 0.106, 0.095) \), calcule-se:
     \begin{align*}
-    \sum_{i=1}^{n} \log(1 - x_i) &= \log(0.334) + \log(0.883) + \log(0.833) \\
-    &+ \log(0.43) + \log(0.894) + \log(0.905) \\
-    &\approx -1.0961 -0.1247 -0.1829 -0.8440 -0.1114 -0.0997 \\
-    &= -2.4596
+    \sum_{i=1}^{n} \log(1 - x_i) &= \log(1-0.666) + \log(1-0.117) + \log(1-0.167) \\
+    &+ \log(1-0.57) + \log(1-0.106) + \log(1-0.095) \\
+    &= \log(0.334) + \log(0.883) + \log(0.833) \\
+    &+ \log(0.430) + \log(0.894) + \log(0.905) \\
+    &\approx -1.0966 -0.1244 -0.1827 -0.8440 -0.1120 -0.0998 \\ % Valores individuais corrigidos (arred. 4 c.d.)
+    &= -2.4596 % Soma confirmada
     \end{align*}
 
     Assim, a estimativa de máxima verosimilhança do parâmetro é:
