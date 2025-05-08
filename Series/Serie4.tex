@@ -30,7 +30,7 @@
 \maketitle
 
 \begin{enumerate}
-    \item \textbf{Admita que o número de programas examinados de modo independente até que se observe o primeiro programa que não compile é representado pela variável aleatória \( X \) com distribuição geométrica com parâmetro \( p \), onde \( p \) é uma probabilidade desconhecida. Determine a estimativa de máxima verosimilhança de \( p \), atendendo à amostra \( (4, 5, 13, 30) \) proveniente da população \( X \).}
+    \item \textbf{Admita que o número de programas examinados de modo independente até que se observe o primeiro programa que não compile é representado pela variável aleatória \( X \) com distribuição geométrica com parâmetro \( p \), onde \( p \) é uma probabilidade desconhecida. Determine a estimativa de máxima verosimilhança de \( p \), atendendo à amostra \( (4, 50, 5, 13, 30) \) proveniente da população \( X \).}
 
     \vspace{0.3cm}
 
@@ -42,39 +42,39 @@
     P(X = x) = (1 - p)^{x - 1} p, \quad x = 1, 2, 3, \ldots
     \end{align*}
 
-    Para a amostra $(x_1, x_2, x_3, x_4) = (4, 5, 13, 30)$, a função de verosimilhança é:
+    Para a amostra $(x_1, x_2, x_3, x_4, x_5) = (4, 50, 5, 13, 30)$, a função de verosimilhança é:
     \begin{align*}
-    L(p) &= \prod_{i=1}^4 P(X = x_i) \\
-    &= \prod_{i=1}^4 (1 - p)^{x_i - 1} p \\
-    &= p^4 \times (1 - p)^{\sum_{i=1}^4 (x_i - 1)} \\
-    &= p^4 \times (1 - p)^{48}
+    L(p) &= \prod_{i=1}^5 P(X = x_i) \\
+    &= \prod_{i=1}^5 (1 - p)^{x_i - 1} p \\
+    &= p^5 \times (1 - p)^{\sum_{i=1}^5 (x_i - 1)} \\
+    &= p^5 \times (1 - p)^{97}
     \end{align*}
 
     Para maximizar a verosimilhança, aplique-se o logaritmo natural:
     \begin{align*}
     \ell(p) &= \log L(p) \\
-    &= \log \left( p^4 \times (1 - p)^{48} \right) \\
-    &= 4 \log p + 48 \log(1-p)
+    &= \log \left( p^5 \times (1 - p)^{97} \right) \\
+    &= 5 \log p + 97 \log(1-p)
     \end{align*}
 
     Derive-se $\ell(p)$ em relação a $p$:
     \begin{align*}
-    \frac{d\ell}{dp} &= \frac{d}{dp} \left( 4 \log p + 48 \log(1-p) \right) \\
-    &= \frac{4}{p} + 48 \cdot \frac{1}{1-p} \cdot (-1) \\
-    &= \frac{4}{p} - \frac{48}{1-p}
+    \frac{d\ell}{dp} &= \frac{d}{dp} \left( 5 \log p + 97 \log(1-p) \right) \\
+    &= \frac{5}{p} + 97 \cdot \frac{1}{1-p} \cdot (-1) \\
+    &= \frac{5}{p} - \frac{97}{1-p}
     \end{align*}
 
     Igualando a derivada a zero para encontrar o valor de $p$ que maximiza $\ell(p)$:
     \begin{align*}
-    \frac{4}{p} - \frac{48}{1-p} &= 0 \\
-    \frac{4}{p} &= \frac{48}{1-p} \\
-    4(1-p) &= 48p \\
-    4 - 4p &= 48p \\
-    4 &= 52p \\
-    p &= \frac{4}{52} = \frac{1}{13} \approx 0.0769
+    \frac{5}{p} - \frac{97}{1-p} &= 0 \\
+    \frac{5}{p} &= \frac{97}{1-p} \\
+    5(1-p) &= 97p \\
+    5 - 5p &= 97p \\
+    5 &= 102p \\
+    p &= \frac{5}{102} \approx 0.0490196
     \end{align*}
 
-    \textbf{Resposta:} A estimativa de máxima verosimilhança de $p$ é $\frac{1}{13} \approx 0.0769$.
+    \textbf{Resposta:} A estimativa de máxima verosimilhança de $p$ é $\frac{5}{102} \approx 0.0490196$.
     \end{mdframed}
 
     \vspace{0.5cm}
