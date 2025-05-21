@@ -1,0 +1,397 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{titling}   
+\usepackage[portuguese]{babel}
+\usepackage{amsmath} 
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{cancel}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{mdframed}
+\usepackage{enumitem}
+\usetikzlibrary{automata, positioning}
+
+\setlength{\droptitle}{-6em}
+\pretitle{\begin{center}\LARGE}
+\posttitle{\par\end{center}}
+\preauthor{\begin{center}\large}
+\postauthor{\end{center}} 
+\predate{\begin{center}\large} 
+\postdate{\end{center}} 
+
+\author{Series de Problemas 5}
+
+\begin{document}
+
+\title{Probabilidade e Estatística}
+\date{21 de Maio de 2025}
+\maketitle
+
+
+\begin{enumerate}
+    \item \textbf{Admita que a resistência mecânica de certo material cerâmico possui distribuição normal com valor esperado e variância desconhecidos. Uma vez medidas as resistências mecânicas de 10 espécimes selecionados casualmente, verificou-se que a média amostral e a variância amostral corrigida são iguais a 10.16 e 2.6401, respectivamente.}
+
+    \textbf{Obtenha um intervalo de confiança a 90\% para o verdadeiro valor esperado da resistência mecânica.}
+
+    \vspace{0.3cm}
+
+    \begin{enumerate}[label=\Alph*)]
+        \item \textbf{[9.5015, 10.8185]}
+        \item \textbf{[9.4494, 10.8706]}
+        \item \textbf{[9.2181, 11.1019]}
+        \item \textbf{[9.3148, 11.0052]}
+    \end{enumerate}
+
+    \vspace{0.3cm}
+
+    \begin{mdframed}[backgroundcolor=gray!10, linewidth=0pt, innertopmargin=10pt, innerbottommargin=10pt]
+    \textbf{Resolução:}
+
+    Neste problema, pretende-se construir um intervalo de confiança para o valor esperado (média) de uma distribuição normal com parâmetros desconhecidos.
+
+    Considere-se a variável aleatória $X$ que representa a resistência mecânica do material cerâmico:
+    \begin{align*}
+    X \sim N(\mu, \sigma^2)
+    \end{align*}
+
+    Dados do problema:
+    \begin{align*}
+    n &= 10 \quad \text{(tamanho da amostra)} \\
+    \bar{X} &= 10.16 \quad \text{(média amostral)} \\
+    S^2 &= 2.6401 \quad \text{(variância amostral corrigida)}
+    \end{align*}
+
+    Quando a média $\mu$ é desconhecida e a variância $\sigma^2$ também é desconhecida, utilizamos a distribuição $t$ de Student para construir o intervalo de confiança.
+
+    A estatística de teste apropriada é:
+    \begin{align*}
+    T = \frac{\bar{X} - \mu}{S/\sqrt{n}} \sim t_{n-1}
+    \end{align*}
+
+    Para um intervalo de confiança de nível $(1-\alpha)$, o intervalo é dado por:
+    \begin{align*}
+    \bar{X} \pm t_{n-1,\,1-\alpha/2} \cdot \frac{S}{\sqrt{n}}
+    \end{align*}
+
+    Aqui:
+    \begin{align*}
+    S &= \sqrt{S^2} = \sqrt{2.6401} \approx 1.6248 \\
+    \end{align*}
+
+    Para nível de confiança de 90\%, temos $\alpha = 0.10$, então $\alpha/2 = 0.05$.
+    
+    Com $n-1 = 9$ graus de liberdade, e utilizando uma tabela da distribuição $t$ ou uma calculadora estatística, encontramos:
+    \begin{align*}
+    t_{9,\,0.95} \approx 1.833
+    \end{align*}
+
+    O erro padrão da média é:
+    \begin{align*}
+    \frac{S}{\sqrt{n}} = \frac{1.6248}{\sqrt{10}} \approx 0.5138
+    \end{align*}
+
+    Portanto, a semi-amplitude do intervalo de confiança é:
+    \begin{align*}
+    t_{9,\,0.95} \cdot \frac{S}{\sqrt{n}} &= 1.833 \times 0.5138 \\
+    &\approx 0.9418
+    \end{align*}
+
+    O intervalo de confiança de 90\% para $\mu$ é:
+    \begin{align*}
+    \bar{X} \pm 0.9418 &= 10.16 \pm 0.9418 \\
+    &= [10.16 - 0.9418, 10.16 + 0.9418] \\
+    &= [9.2182, 11.1018] \\
+    &\approx [9.2181, 11.1019]
+    \end{align*}
+
+    \textbf{Resposta:} A opção correta é \textbf{(C) [9.2181, 11.1019]}.
+    \end{mdframed}
+
+    \vspace{0.5cm}
+
+    \item \textbf{Considere que o tempo de vida de certo tipo de lâmpadas (na unidade militar de hora) tem distribuição normal com valor esperado e variância desconhecidos. Depois de obtidas as durações de 11 lâmpadas selecionadas casualmente, verificou-se que a variância amostral corrigida é igual a 0.0492.}
+
+    \textbf{Determine um intervalo de confiança a 99\% para o verdadeiro valor do desvio padrão.}
+
+    \vspace{0.3cm}
+
+    \begin{enumerate}[label=\Alph*)]
+        \item \textbf{[0.1398, 0.4777]}
+        \item \textbf{[0.0195, 0.2282]}
+        \item \textbf{[0.3099, 0.6478]}
+        \item \textbf{[0.3727, 0.5814]}
+    \end{enumerate}
+
+    \vspace{0.3cm}
+
+    \begin{mdframed}[backgroundcolor=gray!10, linewidth=0pt, innertopmargin=10pt, innerbottommargin=10pt]
+    \textbf{Resolução:}
+    
+    Neste problema, pretende-se construir um intervalo de confiança para o desvio padrão $\sigma$ de uma distribuição normal com parâmetros desconhecidos.
+
+    Considere-se a variável aleatória $X$ que representa o tempo de vida das lâmpadas:
+    \begin{align*}
+    X \sim N(\mu, \sigma^2)
+    \end{align*}
+
+    Dados do problema:
+    \begin{align*}
+    n &= 11 \quad \text{(tamanho da amostra)} \\
+    S^2 &= 0.0492 \quad \text{(variância amostral corrigida)}
+    \end{align*}
+
+    Para construir um intervalo de confiança para $\sigma^2$ (e consequentemente para $\sigma$), utilizamos o resultado de que:
+    \begin{align*}
+    \frac{(n-1)S^2}{\sigma^2} \sim \chi^2_{n-1}
+    \end{align*}
+
+    Para um intervalo de confiança de nível $(1-\alpha)$ para $\sigma^2$, temos:
+    \begin{align*}
+    P\left(\chi^2_{n-1,\,\alpha/2} < \frac{(n-1)S^2}{\sigma^2} < \chi^2_{n-1,\,1-\alpha/2}\right) = 1-\alpha
+    \end{align*}
+
+    Isolando $\sigma^2$:
+    \begin{align*}
+    P\left(\frac{(n-1)S^2}{\chi^2_{n-1,\,1-\alpha/2}} < \sigma^2 < \frac{(n-1)S^2}{\chi^2_{n-1,\,\alpha/2}}\right) = 1-\alpha
+    \end{align*}
+
+    O intervalo de confiança para $\sigma^2$ é, portanto:
+    \begin{align*}
+    \left[\frac{(n-1)S^2}{\chi^2_{n-1,\,1-\alpha/2}}, \frac{(n-1)S^2}{\chi^2_{n-1,\,\alpha/2}}\right]
+    \end{align*}
+
+    Para nível de confiança de 99\%, temos $\alpha = 0.01$, então $\alpha/2 = 0.005$.
+    
+    Com $n-1 = 10$ graus de liberdade, e utilizando uma tabela da distribuição $\chi^2$ ou uma calculadora estatística, encontramos:
+    \begin{align*}
+    \chi^2_{10,\,0.995} &\approx 25.188 \\
+    \chi^2_{10,\,0.005} &\approx 2.156
+    \end{align*}
+
+    Substituindo os valores na fórmula do intervalo de confiança para $\sigma^2$:
+    \begin{align*}
+    \sigma^2_{\text{inf}} &= \frac{(n-1)S^2}{\chi^2_{n-1,\,1-\alpha/2}} \\
+    &= \frac{10 \cdot 0.0492}{25.188} \\
+    &\approx 0.0195
+    \end{align*}
+
+    \begin{align*}
+    \sigma^2_{\text{sup}} &= \frac{(n-1)S^2}{\chi^2_{n-1,\,\alpha/2}} \\
+    &= \frac{10 \cdot 0.0492}{2.156} \\
+    &\approx 0.2282
+    \end{align*}
+
+    Tomando a raiz quadrada para obter o intervalo para o desvio padrão $\sigma$:
+    \begin{align*}
+    \sigma_{\text{inf}} &= \sqrt{\sigma^2_{\text{inf}}} \\
+    &= \sqrt{0.0195} \\
+    &\approx 0.1396
+    \end{align*}
+
+    \begin{align*}
+    \sigma_{\text{sup}} &= \sqrt{\sigma^2_{\text{sup}}} \\
+    &= \sqrt{0.2282} \\
+    &\approx 0.4777
+    \end{align*}
+
+    Portanto, o intervalo de confiança a 99\% para o desvio padrão $\sigma$ é:
+    \begin{align*}
+    [\sigma_{\text{inf}}, \sigma_{\text{sup}}] &= [0.1396, 0.4777]
+    \end{align*}
+
+    Comparando com as alternativas dadas, a opção que mais se aproxima é:
+
+    \textbf{Resposta:} A opção correta é \textbf{(A) [0.1398, 0.4777]}.
+    \end{mdframed}
+
+    \vspace{0.5cm}
+
+    \item \textbf{Em determinada região afetada por um surto epidémico, recolheu-se uma amostra casual de 120 indivíduos, tendo-se encontrado 54 indivíduos contaminados.}
+
+    \textbf{Qual das seguintes opções representa um intervalo de confiança a aproximadamente 95\% para a verdadeira proporção, \( p \), de indivíduos contaminados na região afetada pelo surto epidémico?}
+
+    \vspace{0.3cm}
+
+    \begin{enumerate}[label=\Alph*)]
+        \item \textbf{[0.361, 0.539]}
+        \item \textbf{[0.384, 0.516]}
+        \item \textbf{[0.3753, 0.5247]}
+        \item \textbf{[0.3946, 0.5054]}
+    \end{enumerate}
+
+    \vspace{0.3cm}
+
+    \begin{mdframed}[backgroundcolor=gray!10, linewidth=0pt, innertopmargin=10pt, innerbottommargin=10pt]
+    \textbf{Resolução:}
+
+    Neste problema, pretende-se construir um intervalo de confiança para a proporção $p$ de indivíduos contaminados na população.
+
+    Dados do problema:
+    \begin{align*}
+    n &= 120 \quad \text{(tamanho da amostra)} \\
+    X &= 54 \quad \text{(número de indivíduos contaminados)}
+    \end{align*}
+
+    A proporção amostral é:
+    \begin{align*}
+    \hat{p} = \frac{X}{n} = \frac{54}{120} = 0.45
+    \end{align*}
+
+    Como o tamanho da amostra é grande ($n = 120$) e tanto $n\hat{p} = 120 \times 0.45 = 54$ quanto $n(1-\hat{p}) = 120 \times 0.55 = 66$ são maiores que 5, podemos utilizar a aproximação normal para construir o intervalo de confiança para a proporção.
+
+    O erro padrão da proporção é:
+    \begin{align*}
+    \text{SE}(\hat{p}) &= \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} \\
+    &= \sqrt{\frac{0.45 \times 0.55}{120}} \\
+    &\approx 0.04542
+    \end{align*}
+
+    Para um nível de confiança de 95\%, o valor crítico da distribuição normal padrão é:
+    \begin{align*}
+    z_{0.975} \approx 1.96
+    \end{align*}
+
+    O intervalo de confiança é dado por:
+    \begin{align*}
+    \hat{p} \pm z_{0.975} \times \text{SE}(\hat{p}) &= 0.45 \pm 1.96 \times 0.04542 \\
+    &= 0.45 \pm 0.0890 \\
+    &= [0.45 - 0.0890, 0.45 + 0.0890] \\
+    &= [0.3610, 0.5390] \\
+    &\approx [0.361, 0.539]
+    \end{align*}
+
+    \textbf{Resposta:} A opção correta é \textbf{(A) [0.361, 0.539]}.
+    \end{mdframed}
+
+    \vspace{0.5cm}
+
+    \item \textbf{O engenheiro mecânico responsável pela produção de um dado tipo de pneus admite que a sua duração (em milhas percorridas) possui distribuição normal. Foram testados 19 pneus desse tipo, tendo-se obtido uma amostra com média e variância iguais a \(\bar{x} = 41089.3\) e \(s^2 = 8.34067 \times 10^6\), respectivamente.}
+
+    \textbf{Um engenheiro afirma que o valor esperado da duração desse tipo de pneus é igual a 40000 milhas, ao passo que uma consultora defende que tal valor esperado é inferior a 40000 milhas. Confronte a hipótese defendida pelo engenheiro com a defendida pela consultora e decida com base no valor-\(p\) do teste.}
+
+    \vspace{0.3cm}
+
+    \begin{enumerate}[label=\Alph*)]
+        \item \textbf{Não se rejeita para 1\%, 5\% e 10\%}
+        \item \textbf{Rejeita-se para 10\% e não se rejeita para 1\% e 5\%}
+        \item \textbf{Rejeita-se para 5\% e 10\% e não se rejeita para 1\%}
+        \item \textbf{Rejeita-se para 1\%, 5\% e 10\%}
+    \end{enumerate}
+
+    \vspace{0.3cm}
+
+    \begin{mdframed}[backgroundcolor=gray!10, linewidth=0pt, innertopmargin=10pt, innerbottommargin=10pt]
+    \textbf{Resolução:}
+
+    Neste problema, estamos perante um teste de hipóteses sobre o valor esperado da duração dos pneus. As hipóteses são:
+    \begin{align*}
+    H_0: \mu &= 40000 \\
+    H_a: \mu &< 40000
+    \end{align*}
+
+    Dados do problema:
+    \begin{align*}
+    n &= 19 \quad \text{(tamanho da amostra)} \\
+    \bar{X} &= 41089.3 \quad \text{(média amostral)} \\
+    S^2 &= 8.34067 \times 10^6 \quad \text{(variância amostral corrigida)}
+    \end{align*}
+
+    O desvio padrão amostral corrigido é:
+    \begin{align*}
+    S &= \sqrt{S^2} \\
+    &= \sqrt{8.34067 \times 10^6} \\
+    &\approx 2888.02
+    \end{align*}
+
+    Para testar as hipóteses sobre o valor esperado de uma distribuição normal com variância desconhecida, utilizamos a estatística de teste $T$ que segue uma distribuição $t$ de Student com $(n-1)$ graus de liberdade:
+    \begin{align*}
+    T &= \frac{\bar{X} - \mu_0}{S/\sqrt{n}} \\
+    &= \frac{41089.3 - 40000}{2888.02/\sqrt{19}} \\
+    &= \frac{1089.3}{2888.02/4.3589} \\
+    &= \frac{1089.3}{662.557} \\
+    &\approx 1.644
+    \end{align*}
+
+    Como estamos testando $H_a: \mu < 40000$ (hipótese alternativa da consultora), mas o valor da estatística de teste $T \approx 1.644$ é positivo, significa que os dados amostrais indicam $\bar{X} > \mu_0$. Isto contradiz a direção da hipótese alternativa.
+
+    Para calcular o valor-$p$ para este teste unilateral à esquerda:
+    \begin{align*}
+    \text{valor-}p &= P(T_{18} \leq 1.644) \\
+    &= 1 - P(T_{18} \leq -1.644) \\
+    &\approx 0.941
+    \end{align*}
+
+    Como o valor-$p \approx 0.941$ é maior que os níveis de significância usuais $\alpha \in \{0.01, 0.05, 0.10\}$, não rejeitamos a hipótese nula $H_0$ em favor da hipótese alternativa $H_a$ em nenhum destes níveis.
+
+    \textbf{Resposta:} A opção correta é \textbf{(A) Não se rejeita para 1\%, 5\% e 10\%}.
+    \end{mdframed}
+
+    \vspace{0.5cm}
+
+    \item \textbf{Um inquérito a 100 lisboetas revelou que, entre eles, 19 são favoráveis à aplicação de uma taxa à circulação automóvel no centro histórico da cidade.}
+
+    \textbf{Uma engenheira afirmou que "um quarto dos lisboetas é favorável à proposta". Avalie se os dados recolhidos contrariam esta afirmação. Decida com base no valor-\(p\).}
+
+    \vspace{0.3cm}
+
+    \begin{enumerate}[label=\Alph*)]
+        \item \textbf{Rejeita-se para 10\% e não se rejeita para 1\% e 5\%}
+        \item \textbf{Não se rejeita para 1\%, 5\% e 10\%}
+        \item \textbf{Rejeita-se para 1\%, 5\% e 10\%}
+        \item \textbf{Rejeita-se para 5\% e 10\% e não se rejeita para 1\%}
+    \end{enumerate}
+
+    \vspace{0.3cm}
+
+    \begin{mdframed}[backgroundcolor=gray!10,linewidth=0pt,innertopmargin=10pt,innerbottommargin=10pt]
+    \textbf{Resolução:}
+
+    Neste problema, estamos perante um teste de hipóteses sobre a proporção $p$ de lisboetas favoráveis à aplicação da taxa. As hipóteses são:
+    \begin{align*}
+    H_0: p &= 0.25 \\
+    H_a: p &\neq 0.25
+    \end{align*}
+
+    Dados do problema:
+    \begin{align*}
+    n &= 100 \quad \text{(tamanho da amostra)} \\
+    X &= 19 \quad \text{(número de indivíduos favoráveis)}
+    \end{align*}
+
+    A proporção amostral é:
+    \begin{align*}
+    \hat{p} &= \frac{X}{n} \\
+    &= \frac{19}{100} \\
+    &= 0.19
+    \end{align*}
+
+    Sob $H_0$, o erro padrão da proporção é:
+    \begin{align*}
+    \text{SE}(\hat{p}) &= \sqrt{\frac{p_0(1-p_0)}{n}} \\
+    &= \sqrt{\frac{0.25 \times 0.75}{100}} \\
+    &= \sqrt{0.001875} \\
+    &\approx 0.0433
+    \end{align*}
+
+    Para testar as hipóteses, calculamos a estatística de teste $z$:
+    \begin{align*}
+    z &= \frac{\hat{p} - p_0}{\text{SE}(\hat{p})} \\
+    &= \frac{0.19 - 0.25}{0.0433} \\
+    &\approx -1.386
+    \end{align*}
+
+    Como o teste é bilateral, o valor-$p$ é calculado por:
+    \begin{align*}
+    \text{valor-}p &= 2 \times P(Z \leq -1.386) \\
+    &\approx 2 \times 0.0829 \\
+    &\approx 0.1658
+    \end{align*}
+
+    Como o valor-$p \approx 0.1658$ é maior que os níveis de significância usuais $\alpha \in \{0.01, 0.05, 0.10\}$, não rejeitamos a hipótese nula $H_0$ em favor da hipótese alternativa $H_a$ em nenhum destes níveis.
+
+    \textbf{Resposta:} A opção correta é \textbf{(B) Não se rejeita para 1\%, 5\% e 10\%}.
+    \end{mdframed}
+\end{enumerate}
+\end{document}
