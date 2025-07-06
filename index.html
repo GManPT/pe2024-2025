@@ -3,29 +3,280 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Séries e Resumo Teórico</title>
+    <title>Séries e Formulário Global</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 40px; background-color: #f9f9f9; color: #333; }
-        h1 { color: #2c3e50; text-align: center; }
-        h2 { color: #2980b9; margin-top: 30px; }
-        ul { list-style-type: none; padding: 0; max-width: 600px; margin: 20px auto; }
-        li { margin: 15px 0; background: #fff; padding: 10px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        a { text-decoration: none; color: #2980b9; font-weight: bold; }
-        a:hover { color: #e74c3c; text-decoration: underline; }
-        p { text-align: center; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 50px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section {
+            margin-bottom: 50px;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+        
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .card {
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: color 0.3s ease;
+        }
+        
+        .card a:hover {
+            color: #667eea;
+        }
+        
+        .card-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .formulario-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-align: center;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .formulario-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 45px rgba(102, 126, 234, 0.4);
+        }
+        
+        .formulario-card a {
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .formulario-card a:hover {
+            color: #f0f0f0;
+        }
+        
+        .formulario-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 <body>
-    <h1>Séries Disponíveis</h1>
-    <ul>
-      <li><a href="Serie1.pdf">Série 1</a></li>
-      <li><a href="Serie2.pdf">Série 2</a></li>
-      <li><a href="Serie3.pdf">Série 3</a></li>
-      <li><a href="Serie4.pdf">Série 4</a></li>
-      <li><a href="Serie5.pdf">Série 5</a></li>
-      <li><a href="Serie6.pdf">Série 6</a></li>
-    </ul>
-    <h2>Resumo Teórico</h2>
-    <p><a href="GuiaTeoricoCompleto.pdf">Guia Teórico Completo</a></p>
+    <div class="container fade-in">
+        <h1>📚 Probabilidade e Estatística</h1>
+        
+        <div class="section">
+            <h2 class="section-title">Séries Disponíveis</h2>
+            <div class="cards-grid">
+              <div class="card">
+                  <a href="Serie1.pdf">
+                      <div class="card-icon">📄</div>
+                      <span>Série 1</span>
+                  </a>
+              </div>
+              <div class="card">
+                  <a href="Serie2.pdf">
+                      <div class="card-icon">📄</div>
+                      <span>Série 2</span>
+                  </a>
+              </div>
+              <div class="card">
+                  <a href="Serie3.pdf">
+                      <div class="card-icon">📄</div>
+                      <span>Série 3</span>
+                  </a>
+              </div>
+              <div class="card">
+                  <a href="Serie4.pdf">
+                      <div class="card-icon">📄</div>
+                      <span>Série 4</span>
+                  </a>
+              </div>
+              <div class="card">
+                  <a href="Serie5.pdf">
+                      <div class="card-icon">📄</div>
+                      <span>Série 5</span>
+                  </a>
+              </div>
+              <div class="card">
+                  <a href="Serie6.pdf">
+                      <div class="card-icon">📄</div>
+                      <span>Série 6</span>
+                  </a>
+              </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">Formulário Global</h2>
+            <div class="formulario-card">
+                <div class="formulario-icon">🧮</div>
+                <a href="PEXAME.pdf">
+                    <span>Formulário Global - Preparação para Exame</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Adiciona efeitos de animação suaves
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card, .formulario-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeIn 0.6s ease-in-out';
+                    }
+                });
+            });
+            
+            cards.forEach(card => {
+                observer.observe(card);
+            });
+        });
+    </script>
 </body>
 </html>
