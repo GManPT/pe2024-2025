@@ -66,7 +66,7 @@ jobs:
                   }
                   
                   h1 {
-                      font-size: 3rem;
+                      font-size: 2.8rem;
                       font-weight: 700;
                       text-align: center;
                       background: linear-gradient(135deg, #667eea, #764ba2);
@@ -75,6 +75,19 @@ jobs:
                       background-clip: text;
                       margin-bottom: 50px;
                       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+                      position: relative;
+                  }
+                  
+                  h1::before {
+                      content: '';
+                      position: absolute;
+                      top: -10px;
+                      left: 50%;
+                      transform: translateX(-50%);
+                      width: 100px;
+                      height: 4px;
+                      background: linear-gradient(135deg, #667eea, #764ba2);
+                      border-radius: 2px;
                   }
                   
                   .section {
@@ -104,20 +117,21 @@ jobs:
                   
                   .cards-grid {
                       display: grid;
-                      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                      gap: 25px;
-                      margin-top: 30px;
+                      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+                      gap: 30px;
+                      margin-top: 40px;
                   }
                   
                   .card {
                       background: linear-gradient(135deg, #ffffff, #f8f9fa);
                       border: 1px solid rgba(255, 255, 255, 0.2);
-                      border-radius: 15px;
-                      padding: 25px;
-                      transition: all 0.3s ease;
-                      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+                      border-radius: 20px;
+                      padding: 30px;
+                      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
                       position: relative;
                       overflow: hidden;
+                      transform-style: preserve-3d;
                   }
                   
                   .card::before {
@@ -126,24 +140,44 @@ jobs:
                       top: 0;
                       left: 0;
                       right: 0;
-                      height: 4px;
-                      background: linear-gradient(135deg, #667eea, #764ba2);
+                      height: 5px;
+                      background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+                      border-radius: 20px 20px 0 0;
+                  }
+                  
+                  .card::after {
+                      content: '';
+                      position: absolute;
+                      top: 50%;
+                      left: 50%;
+                      width: 100%;
+                      height: 100%;
+                      background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+                      transform: translate(-50%, -50%) scale(0);
+                      transition: transform 0.4s ease;
+                      z-index: 0;
+                  }
+                  
+                  .card:hover::after {
+                      transform: translate(-50%, -50%) scale(1);
                   }
                   
                   .card:hover {
-                      transform: translateY(-8px);
-                      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+                      transform: translateY(-12px) rotateX(5deg);
+                      box-shadow: 0 25px 50px rgba(102, 126, 234, 0.2);
                   }
                   
                   .card a {
                       text-decoration: none;
                       color: #2c3e50;
                       font-weight: 600;
-                      font-size: 1.1rem;
+                      font-size: 1.2rem;
                       display: flex;
                       align-items: center;
-                      gap: 15px;
-                      transition: color 0.3s ease;
+                      gap: 20px;
+                      transition: all 0.3s ease;
+                      position: relative;
+                      z-index: 1;
                   }
                   
                   .card a:hover {
@@ -151,58 +185,217 @@ jobs:
                   }
                   
                   .card-icon {
-                      width: 40px;
-                      height: 40px;
+                      width: 50px;
+                      height: 50px;
                       background: linear-gradient(135deg, #667eea, #764ba2);
-                      border-radius: 10px;
+                      border-radius: 15px;
                       display: flex;
                       align-items: center;
                       justify-content: center;
-                      font-size: 1.2rem;
+                      font-size: 1.4rem;
                       color: white;
                       flex-shrink: 0;
-                  }
-                  
-                  .formulario-card {
-                      background: linear-gradient(135deg, #667eea, #764ba2);
-                      color: white;
-                      text-align: center;
-                      padding: 40px;
-                      border-radius: 20px;
-                      box-shadow: 0 15px 35px rgba(102, 126, 234, 0.3);
+                      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
                       transition: all 0.3s ease;
                   }
                   
+                  .card:hover .card-icon {
+                      transform: scale(1.1) rotate(5deg);
+                      box-shadow: 0 12px 30px rgba(102, 126, 234, 0.4);
+                  }
+                  
+                  .card-number {
+                      position: absolute;
+                      top: -15px;
+                      right: -15px;
+                      width: 40px;
+                      height: 40px;
+                      background: linear-gradient(135deg, #f093fb, #f5576c);
+                      border-radius: 50%;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      font-size: 1rem;
+                      font-weight: 700;
+                      color: white;
+                      box-shadow: 0 5px 15px rgba(245, 87, 108, 0.3);
+                      z-index: 2;
+                  }
+                  
+                  .formulario-section {
+                      position: relative;
+                      margin-top: 60px;
+                      padding: 40px;
+                      background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+                      border-radius: 30px;
+                      backdrop-filter: blur(10px);
+                      border: 1px solid rgba(255, 255, 255, 0.2);
+                  }
+                  
+                  .formulario-container {
+                      display: grid;
+                      grid-template-columns: 1fr 2fr;
+                      gap: 40px;
+                      align-items: center;
+                  }
+                  
+                  .formulario-left {
+                      display: flex;
+                      flex-direction: column;
+                      align-items: center;
+                      text-align: center;
+                  }
+                  
+                  .formulario-icon-large {
+                      width: 120px;
+                      height: 120px;
+                      background: linear-gradient(135deg, #667eea, #764ba2);
+                      border-radius: 30px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      font-size: 3rem;
+                      color: white;
+                      margin-bottom: 20px;
+                      box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+                      position: relative;
+                      overflow: hidden;
+                  }
+                  
+                  .formulario-icon-large::before {
+                      content: '';
+                      position: absolute;
+                      top: -50%;
+                      left: -50%;
+                      width: 200%;
+                      height: 200%;
+                      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+                      transform: rotate(-45deg);
+                      animation: shine 3s infinite;
+                  }
+                  
+                  @keyframes shine {
+                      0% { transform: translateX(-100%) translateY(-100%) rotate(-45deg); }
+                      50% { transform: translateX(100%) translateY(100%) rotate(-45deg); }
+                      100% { transform: translateX(-100%) translateY(-100%) rotate(-45deg); }
+                  }
+                  
+                  .formulario-right {
+                      position: relative;
+                  }
+                  
+                  .formulario-card {
+                      background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+                      background-size: 200% 200%;
+                      animation: gradientShift 6s ease infinite;
+                      color: white;
+                      padding: 40px;
+                      border-radius: 25px;
+                      box-shadow: 0 20px 50px rgba(102, 126, 234, 0.4);
+                      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                      position: relative;
+                      overflow: hidden;
+                  }
+                  
+                  @keyframes gradientShift {
+                      0% { background-position: 0% 50%; }
+                      50% { background-position: 100% 50%; }
+                      100% { background-position: 0% 50%; }
+                  }
+                  
+                  .formulario-card::before {
+                      content: '';
+                      position: absolute;
+                      top: 0;
+                      left: 0;
+                      right: 0;
+                      bottom: 0;
+                      background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
+                      pointer-events: none;
+                  }
+                  
                   .formulario-card:hover {
-                      transform: translateY(-5px);
-                      box-shadow: 0 20px 45px rgba(102, 126, 234, 0.4);
+                      transform: translateY(-8px) scale(1.02);
+                      box-shadow: 0 30px 60px rgba(102, 126, 234, 0.5);
+                  }
+                  
+                  .formulario-title {
+                      font-size: 1.5rem;
+                      font-weight: 700;
+                      margin-bottom: 15px;
+                      position: relative;
+                      z-index: 1;
+                  }
+                  
+                  .formulario-description {
+                      font-size: 1rem;
+                      opacity: 0.9;
+                      margin-bottom: 25px;
+                      position: relative;
+                      z-index: 1;
                   }
                   
                   .formulario-card a {
                       color: white;
-                      font-size: 1.3rem;
-                      font-weight: 700;
+                      font-size: 1.2rem;
+                      font-weight: 600;
                       text-decoration: none;
                       display: inline-flex;
                       align-items: center;
                       gap: 15px;
+                      background: rgba(255, 255, 255, 0.2);
+                      padding: 12px 25px;
+                      border-radius: 50px;
                       transition: all 0.3s ease;
+                      position: relative;
+                      z-index: 1;
+                      backdrop-filter: blur(10px);
+                      border: 1px solid rgba(255, 255, 255, 0.3);
                   }
                   
                   .formulario-card a:hover {
-                      color: #f0f0f0;
+                      background: rgba(255, 255, 255, 0.3);
+                      transform: translateX(5px);
                   }
                   
-                  .formulario-icon {
-                      width: 50px;
-                      height: 50px;
-                      background: rgba(255, 255, 255, 0.2);
-                      border-radius: 15px;
-                      display: inline-flex;
-                      align-items: center;
-                      justify-content: center;
-                      font-size: 1.5rem;
-                      margin-bottom: 20px;
+                  .floating-elements {
+                      position: absolute;
+                      top: 0;
+                      left: 0;
+                      right: 0;
+                      bottom: 0;
+                      pointer-events: none;
+                      overflow: hidden;
+                  }
+                  
+                  .floating-elements::before,
+                  .floating-elements::after {
+                      content: '';
+                      position: absolute;
+                      background: rgba(255, 255, 255, 0.1);
+                      border-radius: 50%;
+                      animation: float 4s ease-in-out infinite;
+                  }
+                  
+                  .floating-elements::before {
+                      width: 60px;
+                      height: 60px;
+                      top: 20%;
+                      right: 10%;
+                      animation-delay: 0s;
+                  }
+                  
+                  .floating-elements::after {
+                      width: 80px;
+                      height: 80px;
+                      bottom: 20%;
+                      left: 10%;
+                      animation-delay: 2s;
+                  }
+                  
+                  @keyframes float {
+                      0%, 100% { transform: translateY(0px) rotate(0deg); }
+                      50% { transform: translateY(-20px) rotate(180deg); }
                   }
                   
                   @media (max-width: 768px) {
@@ -211,7 +404,7 @@ jobs:
                       }
                       
                       h1 {
-                          font-size: 2.2rem;
+                          font-size: 2rem;
                       }
                       
                       .section-title {
@@ -220,6 +413,21 @@ jobs:
                       
                       .cards-grid {
                           grid-template-columns: 1fr;
+                      }
+                      
+                      .formulario-container {
+                          grid-template-columns: 1fr;
+                          gap: 30px;
+                      }
+                      
+                      .formulario-icon-large {
+                          width: 80px;
+                          height: 80px;
+                          font-size: 2rem;
+                      }
+                      
+                      .formulario-section {
+                          padding: 20px;
                       }
                   }
                   
@@ -241,34 +449,51 @@ jobs:
           </head>
           <body>
               <div class="container fade-in">
-                  <h1>📚 Probabilidade e Estatística</h1>
+                  <h1>📚 Probabilidade e Estatística (2024/2025)</h1>
                   
                   <div class="section">
                       <h2 class="section-title">Séries Disponíveis</h2>
                       <div class="cards-grid">
           EOF
+          counter=1
           for file in dist/Serie*.pdf; do
             [ -f "$file" ] || continue
             base=$(basename "$file" .pdf)
             display_name=${base/Serie/Série\ }
             echo "              <div class=\"card\">" >> dist/index.html
+            echo "                  <div class=\"card-number\">${counter}</div>" >> dist/index.html
             echo "                  <a href=\"${base}.pdf\">" >> dist/index.html
-            echo "                      <div class=\"card-icon\">📄</div>" >> dist/index.html
+            echo "                      <div class=\"card-icon\">📊</div>" >> dist/index.html
             echo "                      <span>${display_name}</span>" >> dist/index.html
             echo "                  </a>" >> dist/index.html
             echo "              </div>" >> dist/index.html
+            counter=$((counter + 1))
           done
           cat << 'EOF' >> dist/index.html
                       </div>
                   </div>
                   
-                  <div class="section">
+                  <div class="formulario-section">
+                      <div class="floating-elements"></div>
                       <h2 class="section-title">Formulário Global</h2>
-                      <div class="formulario-card">
-                          <div class="formulario-icon">🧮</div>
-                          <a href="PEXAME.pdf">
-                              <span>Formulário Global - Preparação para Exame</span>
-                          </a>
+                      <div class="formulario-container">
+                          <div class="formulario-left">
+                              <div class="formulario-icon-large">🧮</div>
+                              <h3 style="color: #2c3e50; margin: 0;">Preparação Completa</h3>
+                          </div>
+                          <div class="formulario-right">
+                              <div class="formulario-card">
+                                  <div class="formulario-title">Formulário Global - Exame</div>
+                                  <div class="formulario-description">
+                                      Todas as fórmulas e conceitos essenciais num só documento. 
+                                      Perfeito para consulta rápida durante o estudo e preparação para exames.
+                                  </div>
+                                  <a href="PEXAME.pdf">
+                                      <span>Abrir Formulário</span>
+                                      <span>→</span>
+                                  </a>
+                              </div>
+                          </div>
                       </div>
                   </div>
               </div>
