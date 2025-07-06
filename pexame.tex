@@ -1,0 +1,593 @@
+% Estrutura base do documento para fórmulas
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{framed}
+\usepackage{tcolorbox}
+\usepackage{multicol}
+\usepackage{enumitem}
+\geometry{margin=2.5cm}
+\setlength{\parindent}{0pt}
+
+% Configuração de cores
+\definecolor{formulabox}{RGB}{240,248,255}
+\definecolor{sectioncolor}{RGB}{0,51,102}
+\definecolor{formulalink}{RGB}{220,20,60}
+
+% Configuração de caixas para fórmulas
+\tcbuselibrary{breakable}
+\tcbuselibrary{skins}
+\newtcolorbox{formulabox}[1]{
+    colback=formulabox,
+    colframe=sectioncolor,
+    title=#1,
+    fonttitle=\bfseries,
+    breakable,
+    enhanced,
+    left=8pt,
+    right=8pt,
+    top=8pt,
+    bottom=8pt
+}
+
+% Primeira página apelativa
+\begin{document}
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    {\Huge\bfseries\color{sectioncolor} FORMULÁRIO}\\[0.5em]
+    {\huge\bfseries\color{sectioncolor} PROBABILIDADE E ESTATÍSTICA}\\[3em]
+    
+    \begin{tcolorbox}[colback=formulabox,colframe=sectioncolor,width=0.8\textwidth]
+        \centering
+        {\large\textbf{Navegação rápida por fórmulas}}\\[0.5em]
+        {\normalsize \textbf{Índice geral:} Página 2}\\
+        {\normalsize \textbf{Índice de fórmulas:} Página 3}\\[0.3em]
+        {\small Clique-se diretamente na fórmula desejada para navegar até lá}
+    \end{tcolorbox}
+    
+    \vfill
+    {\large\textbf{Autor:} Vicente Duarte}\\[1em]
+    {\large\textbf{Data:} \today}
+    \vspace{2cm}
+\end{titlepage}
+
+% Índice geral na segunda página
+\newpage
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    pdftitle={Formulário de Probabilidade e Estatística},
+    pdfauthor={Vicente Duarte}
+}
+{\color{sectioncolor}\section*{Índice Geral}}
+\tableofcontents
+
+% Índice de fórmulas na terceira página
+\newpage
+{\color{sectioncolor}\section*{Índice de Fórmulas}}
+\begin{tcolorbox}[colback=formulabox,colframe=sectioncolor]
+\textbf{Clique na fórmula desejada para navegar diretamente:}
+\end{tcolorbox}
+
+\begin{multicols}{2}
+\small
+\textbf{\color{sectioncolor}PROBABILIDADE BÁSICA}
+\begin{itemize}[leftmargin=*]
+    \item \hyperref[formula1]{\color{formulalink}Fórmula 1:} Acontecimentos mutuamente exclusivos
+    \item \hyperref[formula2]{\color{formulalink}Fórmula 2:} União de três acontecimentos
+    \item \hyperref[formula3]{\color{formulalink}Fórmula 3:} Inclusão-exclusão para n acontecimentos
+    \item \hyperref[formula4]{\color{formulalink}Fórmula 4:} Teorema de Bayes
+    \item \hyperref[formula5]{\color{formulalink}Fórmula 5:} Independência de acontecimentos
+\end{itemize}
+
+\textbf{\color{sectioncolor}VARIÁVEIS ALEATÓRIAS}
+\begin{itemize}[leftmargin=*]
+    \item \hyperref[formula6]{\color{formulalink}Fórmula 6:} Valor esperado (discretas)
+    \item \hyperref[formula7]{\color{formulalink}Fórmula 7:} Valor esperado (contínuas)
+    \item \hyperref[formula8]{\color{formulalink}Fórmula 8:} Variância
+    \item \hyperref[formula9]{\color{formulalink}Fórmula 9:} Propriedade da esperança
+    \item \hyperref[formula10]{\color{formulalink}Fórmula 10:} Propriedade da variância
+    \item \hyperref[formula11]{\color{formulalink}Fórmula 11:} Quantis
+    \item \hyperref[formula12]{\color{formulalink}Fórmula 12:} Falta de memória (geométrica)
+    \item \hyperref[formula13]{\color{formulalink}Fórmula 13:} Falta de memória (exponencial)
+    \item \hyperref[formula14]{\color{formulalink}Fórmula 14:} Soma de binomiais
+    \item \hyperref[formula15]{\color{formulalink}Fórmula 15:} Soma de Poisson
+    \item \hyperref[formula16]{\color{formulalink}Fórmula 16:} Combinação linear de normais
+\end{itemize}
+
+\textbf{\color{sectioncolor}PARES ALEATÓRIOS}
+\begin{itemize}[leftmargin=*]
+    \item \hyperref[formula17]{\color{formulalink}Fórmula 17:} Função de distribuição acumulada
+    \item \hyperref[formula18]{\color{formulalink}Fórmula 18:} Independência (discreto)
+    \item \hyperref[formula19]{\color{formulalink}Fórmula 19:} Independência (contínuo)
+    \item \hyperref[formula20]{\color{formulalink}Fórmula 20:} Covariância
+    \item \hyperref[formula21]{\color{formulalink}Fórmula 21:} Correlação
+\end{itemize}
+
+\textbf{\color{sectioncolor}TEOREMA LIMITE CENTRAL}
+\begin{itemize}[leftmargin=*]
+    \item \hyperref[formula22]{\color{formulalink}Fórmula 22:} TLC (soma)
+    \item \hyperref[formula22a]{\color{formulalink}Fórmula 22a:} TLC (média)
+\end{itemize}
+
+\textbf{\color{sectioncolor}ESTIMAÇÃO}
+\begin{itemize}[leftmargin=*]
+    \item \hyperref[formula23]{\color{formulalink}Fórmula 23:} Máxima verosimilhança
+    \item \hyperref[formula24]{\color{formulalink}Fórmula 24:} IC média (variância conhecida)
+    \item \hyperref[formula25]{\color{formulalink}Fórmula 25:} IC média (t-Student)
+    \item \hyperref[formula26]{\color{formulalink}Fórmula 26:} IC média (amostra grande)
+    \item \hyperref[formula27]{\color{formulalink}Fórmula 27:} IC variância
+    \item \hyperref[formula28]{\color{formulalink}Fórmula 28:} IC proporção
+\end{itemize}
+
+\textbf{\color{sectioncolor}TESTES DE HIPÓTESES}
+\begin{itemize}[leftmargin=*]
+    \item \hyperref[formula29]{\color{formulalink}Fórmula 29:} Teste média (variância conhecida)
+    \item \hyperref[formula30]{\color{formulalink}Fórmula 30:} Teste média (variância desconhecida)
+    \item \hyperref[formula31]{\color{formulalink}Fórmula 31:} Teste variância
+    \item \hyperref[formula32]{\color{formulalink}Fórmula 32:} Teste proporção
+    \item \hyperref[formula33]{\color{formulalink}Fórmula 33:} Teste qui-quadrado
+\end{itemize}
+
+\textbf{\color{sectioncolor}REGRESSÃO LINEAR}
+\begin{itemize}[leftmargin=*]
+    \item \hyperref[formula34]{\color{formulalink}Fórmula 34:} Estimador inclinação
+    \item \hyperref[formula35]{\color{formulalink}Fórmula 35:} Estimador ordenada origem
+    \item \hyperref[formula36]{\color{formulalink}Fórmula 36:} Inferência sobre $\beta_0$
+    \item \hyperref[formula37]{\color{formulalink}Fórmula 37:} Inferência sobre $\beta_1$
+    \item \hyperref[formula38]{\color{formulalink}Fórmula 38:} Inferência sobre $\beta_0 + \beta_1 x_0$
+    \item \hyperref[formula39]{\color{formulalink}Fórmula 39:} Teste valor esperado resposta
+    \item \hyperref[formula40]{\color{formulalink}Fórmula 40:} Coeficiente determinação $R^2$
+\end{itemize}
+\end{multicols}
+
+\newpage
+
+\section{\color{sectioncolor}Conceitos básicos de probabilidade}
+\subsection{Experiência aleatória. Espaço de resultados e acontecimentos}
+
+\subsection{Noção de probabilidade. Probabilidade condicionada e lei da probabilidade total}
+
+\begin{formulabox}{Acontecimentos mutuamente exclusivos}
+Dois acontecimentos são mutuamente exclusivos se não podem ocorrer simultaneamente:
+\begin{equation}\label{formula1}\tag{Fórmula 1}
+A \cap B = \emptyset \quad \Rightarrow \quad P(A \cap B) = 0
+\end{equation}
+\end{formulabox}
+
+\begin{formulabox}{Probabilidade da união de três acontecimentos}
+\begin{equation}\label{formula2}\tag{Fórmula 2}
+\begin{aligned}
+    P(A \cup B \cup C) = &\ P(A) + P(B) + P(C) \\
+    &- P(A \cap B) - P(A \cap C) - P(B \cap C) \\
+    &+ P(A \cap B \cap C)
+\end{aligned}
+\end{equation}
+\end{formulabox}
+
+\begin{formulabox}{Fórmula da inclusão-exclusão para n acontecimentos}
+\begin{equation}\label{formula3}\tag{Fórmula 3}
+P\left(\bigcup_{i=1}^n A_i\right) = \sum_{i=1}^n P(A_i) - \sum_{i<j} P(A_i \cap A_j) + \sum_{i<j<k} P(A_i \cap A_j \cap A_k) - \cdots + (-1)^{n+1} P(A_1 \cap \cdots \cap A_n)
+\end{equation}
+\end{formulabox}
+
+\subsection{Teorema de Bayes}
+
+O Teorema de Bayes permite calcular a probabilidade \textit{a posteriori} de um acontecimento $A_i$ dado que ocorreu um acontecimento $B$.
+
+\begin{formulabox}{Teorema de Bayes}
+\begin{equation}\label{formula4}\tag{Fórmula 4}
+    P(A_i \mid B) = \frac{P(B \mid A_i) P(A_i)}{\sum\limits_{j=1}^n P(B \mid A_j) P(A_j)}
+\end{equation}
+
+\textbf{Onde:}
+\begin{itemize}
+    \item $A_1, \ldots, A_n$ formam uma partição do espaço amostral
+    \item $B$ é um acontecimento tal que $P(B) > 0$
+    \item $P(A_i)$ é a probabilidade \textit{a priori} de $A_i$
+    \item $P(B \mid A_i)$ é a verosimilhança de $B$ dado $A_i$
+    \item $P(A_i \mid B)$ é a probabilidade \textit{a posteriori} de $A_i$ dado $B$
+\end{itemize}
+\end{formulabox}
+
+\subsection{Acontecimentos independentes}
+
+\begin{formulabox}{Independência de acontecimentos}
+Dois acontecimentos $A$ e $B$ são independentes se e só se:
+\begin{equation}\label{formula5}\tag{Fórmula 5}
+    P(A \cap B) = P(A) \cdot P(B)
+\end{equation}
+\end{formulabox}
+
+\newpage
+
+\section{\color{sectioncolor}Variáveis aleatórias discretas e contínuas}
+\subsection{Definição de variável aleatória. Função de distribuição. Função de massa de probabilidade e função de densidade de probabilidade}
+
+\subsection{Valor esperado, moda, variância e quantis}
+
+\begin{formulabox}{Valor esperado para variáveis discretas}
+\begin{equation}\label{formula6}\tag{Fórmula 6}
+    E(X) = \sum_{x} x \, P(X = x)
+\end{equation}
+\end{formulabox}
+
+\begin{formulabox}{Valor esperado para variáveis contínuas}
+\begin{equation}\label{formula7}\tag{Fórmula 7}
+    E(X) = \int_{-\infty}^{+\infty} x \, f_X(x) \, dx
+\end{equation}
+\end{formulabox}
+
+\begin{formulabox}{Variância}
+\begin{equation}\label{formula8}\tag{Fórmula 8}
+    \mathrm{Var}(X) = E[(X - E(X))^2] = E(X^2) - [E(X)]^2
+\end{equation}
+\end{formulabox}
+
+\begin{formulabox}{Propriedades da esperança e variância}
+\textbf{Esperança:}
+\begin{equation}\label{formula9}\tag{Fórmula 9}
+    E(aX + bY) = aE(X) + bE(Y)
+\end{equation}
+
+\textbf{Variância:}
+\begin{equation}\label{formula10}\tag{Fórmula 10}
+    \mathrm{Var}(aX + bY) = a^2 \, \mathrm{Var}(X) + b^2 \, \mathrm{Var}(Y) + 2ab\,\mathrm{Cov}(X, Y)
+\end{equation}
+\end{formulabox}
+
+\begin{formulabox}{Quantis}
+\textbf{Mediana:} valor $m$ tal que $P(X \leq m) \geq 0.5$ e $P(X \geq m) \geq 0.5$
+
+\textbf{Quantil de ordem $q$ ($0 < q < 1$):}
+\begin{equation}\label{formula11}\tag{Fórmula 11}
+    x_q = F_X^{-1}(q) \quad \text{onde } F_X(x_q) = q
+\end{equation}
+\end{formulabox}
+
+\subsection{Distribuições de probabilidade mais utilizadas na modelação de dados}
+
+\begin{formulabox}{Propriedade de falta de memória - Distribuição geométrica}
+Para uma sequência de ensaios de Bernoulli:
+\begin{equation}\label{formula12}\tag{Fórmula 12}
+    P(X > m + n \mid X > m) = P(X > n)
+\end{equation}
+\textit{Interpretação:} A probabilidade de esperar mais $n$ tentativas, dado que já se esperou $m$, é independente do número de tentativas já realizadas.
+\end{formulabox}
+
+\begin{formulabox}{Propriedade de falta de memória - Distribuição exponencial}
+Se $T \sim \mathrm{Exp}(\lambda)$ representa o tempo até à ocorrência de um evento:
+\begin{equation}\label{formula13}\tag{Fórmula 13}
+    P(T > t + s \mid T > s) = P(T > t)
+\end{equation}
+\textit{Nota:} A distribuição exponencial é a única distribuição contínua com propriedade de falta de memória.
+\end{formulabox}
+
+\begin{formulabox}{Soma de variáveis binomiais independentes}
+Se $X_i \sim \mathrm{Bin}(n_i, p)$ são independentes, então:
+\begin{equation}\label{formula14}\tag{Fórmula 14}
+    X = \sum_{i=1}^k X_i \sim \mathrm{Bin}\left(\sum_{i=1}^k n_i,\, p\right)
+\end{equation}
+\textit{Condição:} Todas as variáveis devem ter o mesmo parâmetro $p$.
+\end{formulabox}
+
+\begin{formulabox}{Soma de variáveis de Poisson independentes}
+Se $X_i \sim \mathrm{Poisson}(\lambda_i)$ são independentes, então:
+\begin{equation}\label{formula15}\tag{Fórmula 15}
+    X = \sum_{i=1}^k X_i \sim \mathrm{Poisson}\left(\sum_{i=1}^k \lambda_i\right)
+\end{equation}
+\end{formulabox}
+
+\begin{formulabox}{Combinação linear de variáveis normais independentes}
+Se $X_i \sim N(\mu_i, \sigma_i^2)$ são independentes e $a_i$ são constantes reais:
+\begin{equation}\label{formula16}\tag{Fórmula 16}
+    X = \sum_{i=1}^k a_i X_i \sim N\left(\sum_{i=1}^k a_i \mu_i,\ \sum_{i=1}^k a_i^2 \sigma_i^2\right)
+\end{equation}
+\end{formulabox}
+
+\newpage
+
+\section{\color{sectioncolor}Pares aleatórios}
+\subsection{Distribuição conjunta, marginais e condicionais}
+
+\begin{formulabox}{Função de distribuição acumulada (FDA)}
+Para uma variável aleatória contínua $X$:
+\begin{equation}\label{formula17}\tag{Fórmula 17}
+    F_X(x) = P(X \leq x) = \int_{-\infty}^{x} f_X(t)\,dt
+\end{equation}
+\end{formulabox}
+
+\subsection{Independência}
+
+\begin{formulabox}{Independência - Caso discreto}
+$X$ e $Y$ são independentes se, para todos os valores possíveis $x$ e $y$:
+\begin{equation}\label{formula18}\tag{Fórmula 18}
+    P(X = x,\ Y = y) = P(X = x) \cdot P(Y = y)
+\end{equation}
+\end{formulabox}
+
+\begin{formulabox}{Independência - Caso contínuo}
+$X$ e $Y$ são independentes se, para todos os valores $x$ e $y$:
+\begin{equation}\label{formula19}\tag{Fórmula 19}
+    f_{X,Y}(x, y) = f_X(x) \cdot f_Y(y)
+\end{equation}
+\end{formulabox}
+
+\subsection{Covariância e correlação}
+
+\begin{formulabox}{Covariância}
+\begin{equation}\label{formula20}\tag{Fórmula 20}
+    \mathrm{Cov}(X, Y) = E[(X - E(X))(Y - E(Y))] = E(XY) - E(X)E(Y)
+\end{equation}
+\end{formulabox}
+
+\begin{formulabox}{Correlação}
+\begin{equation}\label{formula21}\tag{Fórmula 21}
+    \mathrm{Corr}(X, Y) = \frac{\mathrm{Cov}(X, Y)}{\sqrt{\mathrm{Var}(X)} \sqrt{\mathrm{Var}(Y)}}
+\end{equation}
+
+\textbf{Interpretação da correlação:}
+\begin{itemize}
+    \item $\mathrm{Corr}(X, Y) = 0$: Ausência de correlação linear (não implica independência)
+    \item $\mathrm{Corr}(X, Y) > 0$: Associação linear positiva
+    \item $\mathrm{Corr}(X, Y) < 0$: Associação linear negativa
+    \item $|\mathrm{Corr}(X, Y)| = 1$: Correlação linear perfeita
+    \item $|\mathrm{Corr}(X, Y)| \approx 0.24$: Correlação linear fraca
+\end{itemize}
+
+\textbf{Exemplos de interpretação:}
+\begin{itemize}
+    \item \textbf{Se $\mathrm{Corr}(X, Y) \neq 0$:} Uma vez que $\mathrm{Corr}(X, Y) \neq 0$, concluímos que $X$ e $Y$ são variáveis aleatórias dependentes. [É sabido que: caso $X$ e $Y$ sejam v.a. independentes, então $\mathrm{Corr}(X, Y) = 0$.]
+    \item \textbf{Se $\mathrm{Corr}(X, Y) < 0$:} Dado que $\mathrm{Corr}(X, Y) < 0$, podemos adiantar que $X$ e $Y$ tenderão a variar em sentidos opostos relativamente aos respetivos valores esperados.
+    \item \textbf{Se $|\mathrm{Corr}(X, Y)| \approx 0.24$:} Como $|\mathrm{Corr}(X, Y)| \approx 0.24$ dista bastante de 1, podemos afirmar que as v.a. estão fracamente correlacionadas. [Importa notar que o coeficiente de correlação quantifica a associação linear entre as v.a. $X$ e $Y$, logo não captura uma eventual relação não linear entre estas duas v.a.]
+\end{itemize}
+\end{formulabox}
+
+\newpage
+
+\section{\color{sectioncolor}Combinações lineares e teorema do limite central}
+\subsection{Combinações lineares de variáveis aleatórias}
+
+\subsection{Distribuição assintótica da soma e da média}
+
+\begin{formulabox}{Teorema do Limite Central (TLC)}
+Seja $X_1, X_2, \ldots, X_n$ uma amostra i.i.d. com média $\mu$ e variância $\sigma^2$. Para $n$ suficientemente grande ($n \geq 30$):
+
+\begin{equation}\label{formula22}\tag{Fórmula 22}
+    \frac{S_n - n\mu}{\sigma\sqrt{n}} \overset{a}{\sim} N(0,1) \quad \text{onde } S_n = X_1 + \cdots + X_n
+\end{equation}
+
+\textbf{Equivalentemente, para a média amostral:}
+\begin{equation}\label{formula22a}\tag{Fórmula 22a}
+    \frac{\overline{X} - \mu}{\sigma/\sqrt{n}} \overset{a}{\sim} N(0,1) \quad \text{onde } \overline{X} = \frac{S_n}{n}
+\end{equation}
+
+\textbf{Quando usar o TLC:}
+\begin{itemize}
+    \item \textbf{Distribuição original desconhecida ou não-normal:} O TLC permite usar a aproximação normal para a soma ou média amostral, desde que $n \geq 30$.
+    \item \textbf{Distribuição original normal:} A soma ou média amostral tem distribuição exatamente normal para qualquer $n$ (não é necessário recorrer ao TLC).
+    \item \textbf{Aplicação prática:} Permite calcular probabilidades e construir intervalos de confiança quando a distribuição populacional é desconhecida.
+\end{itemize}
+
+\textbf{Notas importantes:}
+\begin{itemize}
+    \item Válido independentemente da distribuição original das $X_i$
+    \item A convergência é mais rápida se a distribuição original for simétrica
+    \item Para $n < 30$, só se pode usar se a população for aproximadamente normal
+\end{itemize}
+\end{formulabox}
+
+\newpage
+
+\section{\color{sectioncolor}Estimação pontual}
+\subsection{Estatísticas e estimadores}
+
+\subsection{Método da máxima verosimilhança}
+
+\begin{formulabox}{Função de máxima verosimilhança}
+Para uma amostra $X_1, \ldots, X_n$ com função de densidade $f_X(x)$ dependente do parâmetro $\mu$:
+
+\textbf{Função de verosimilhança:}
+\begin{equation}\label{formula23}\tag{Fórmula 23}
+    L(\mu\mid \underline{x}) = \prod_{i=1}^n f_X(x_i)
+\end{equation}
+
+\textbf{Função log-verosimilhança:}
+\begin{equation*}
+    \ell(\mu\mid \underline{x}) = \ln L(\mu\mid \underline{x}) = \sum_{i=1}^n \ln f_X(x_i)
+\end{equation*}
+
+\textbf{Estimador de máxima verosimilhança:}
+\[
+    \hat{\mu} : 
+    \begin{cases}
+        \left. \dfrac{\partial\, \ln L(\mu \mid \underline{x})}{\partial \mu} \right|_{\mu = \hat{\mu}} = 0 \quad &\text{(ponto estacionário)} \\[2ex]
+        \left. \dfrac{\partial^2\, \ln L(\mu \mid \underline{x})}{\partial \mu^2} \right|_{\mu = \hat{\mu}} < 0 \quad &\text{(ponto de máximo)}
+    \end{cases}
+\]
+\end{formulabox}
+
+\newpage
+
+\section{\color{sectioncolor}Estimação intervalar}
+\subsection{Intervalos de confiança para o valor esperado, variância conhecida}
+
+\begin{formulabox}{IC para média - Variância conhecida}
+Para população normal ou amostra grande (TLC):
+\begin{equation}\label{formula24}\tag{Fórmula 24}
+    Z = \frac{\overline{X} - \mu}{\sigma/\sqrt{n}} \sim N(0,1)
+\end{equation}
+\end{formulabox}
+
+\subsection{Intervalos de confiança para o valor esperado, variância desconhecida}
+
+\begin{formulabox}{{IC para média - Variância desconhecida (amostra pequena, população normal)}}
+\begin{equation}\label{formula25}\tag{Fórmula 25}
+    T = \frac{\overline{X} - \mu}{S/\sqrt{n}} \sim t_{(n-1)}
+\end{equation}
+\end{formulabox}
+
+\begin{formulabox}{IC para média - Variância desconhecida (amostra grande)}
+\begin{equation}\label{formula26}\tag{Fórmula 26}
+    Z = \frac{\overline{X} - \mu}{S/\sqrt{n}} \overset{a}{\sim} N(0,1)
+\end{equation}
+\end{formulabox}
+
+\subsection{Intervalo de confiança para a variância}
+
+\begin{formulabox}{{IC para variância - População normal, média desconhecida}}
+\begin{equation}\label{formula27}\tag{Fórmula 27}
+    \chi^2 = \frac{(n-1)S^2}{\sigma^2} \sim \chi^2_{(n-1)}
+\end{equation}
+\end{formulabox}
+
+\subsection{Intervalo de confiança para probabilidade de sucesso}
+
+\begin{formulabox}{IC para proporção - População de Bernoulli}
+Para $X \sim \text{Bernoulli}(p)$ com amostra grande:
+\begin{equation}\label{formula28}\tag{Fórmula 28}
+    Z = \frac{\overline{X} - p}{\sqrt{\frac{\overline{X}(1-\overline{X})}{n}}} \sim N(0, 1)
+\end{equation}
+\end{formulabox}
+
+\newpage
+
+\section{\color{sectioncolor}Testes de hipóteses}
+\subsection{Testes para o valor esperado, variância conhecida}
+
+\begin{formulabox}{Teste para média - Variância conhecida}
+Para testar $H_0: \mu = \mu_0$:
+\begin{equation}\label{formula29}\tag{Fórmula 29}
+    Z = \frac{\overline{X} - \mu_0}{\sigma/\sqrt{n}} \sim N(0,1)
+\end{equation}
+Rejeita-se $H_0$ se $|Z| > z_{1-\alpha/2}$ (teste bilateral).
+\end{formulabox}
+
+\begin{formulabox}{Cálculo do valor-p}
+\textbf{Definição:} Probabilidade, sob $H_0$, de obter um valor da estatística tão extremo ou mais extremo que o observado.
+
+\begin{itemize}
+    \item \textbf{Testes bilaterais:} $\text{valor-p} = 2 \cdot P(Z > |z_{obs}|)$
+    \item \textbf{Testes unilaterais:} $\text{valor-p} = P(Z > z_{obs})$ ou $P(Z < z_{obs})$
+    \item \textbf{Para estatísticas t:} Substituir $Z$ por $t$ e usar distribuição t
+    \item \textbf{Decisão:} Compara-se com $\alpha$ para decidir sobre $H_0$
+\end{itemize}
+\end{formulabox}
+
+\subsection{Testes para o valor esperado, variância desconhecida}
+
+\begin{formulabox}{Teste para média - Variância desconhecida}
+Para testar $H_0: \mu = \mu_0$ em população normal:
+\begin{equation}\label{formula30}\tag{Fórmula 30}
+    t = \frac{\overline{X} - \mu_0}{S/\sqrt{n}} \sim t_{(n-1)}
+\end{equation}
+Rejeita-se $H_0$ se $|t| > t_{n-1,1-\alpha/2}$. Para $n$ grande, usar aproximação normal.
+\end{formulabox}
+
+\subsection{Testes para a variância}
+
+\begin{formulabox}{Teste para variância - População normal}
+Para testar hipóteses sobre $\sigma^2$ com média desconhecida:
+\begin{equation}\label{formula31}\tag{Fórmula 31}
+    T = \frac{(n-1)S^2}{\sigma^2} \sim \chi^2_{(n-1)}
+\end{equation}
+\end{formulabox}
+
+\subsection{Testes para probabilidade de sucesso}
+
+\begin{formulabox}{Teste para proporção - População de Bernoulli}
+Para testar $H_0: p = p_0$ com amostra grande ($n > 30$):
+\begin{equation}\label{formula32}\tag{Fórmula 32}
+    T = \frac{\overline{X} - p_0}{\sqrt{\frac{p_0(1-p_0)}{n}}} \overset{a}{\sim}_{H_0} N(0, 1)
+\end{equation}
+\end{formulabox}
+
+\subsection{Teste de ajustamento do qui-quadrado}
+
+\begin{formulabox}{Teste de ajustamento de Pearson}
+Para hipótese nula simples:
+\begin{equation}\label{formula33}\tag{Fórmula 33}
+    T = \sum_{i=1}^k \frac{(O_i - E_i)^2}{E_i} \overset{H_0}{\sim} \chi^2_{(k-1)}
+\end{equation}
+Onde $O_i$ são frequências observadas, $E_i$ são frequências esperadas e $k$ é o número de categorias.
+\end{formulabox}
+
+\newpage
+
+\section{\color{sectioncolor}Introdução à regressão linear simples}
+\subsection{Modelo de regressão linear simples}
+
+\begin{formulabox}{Estimadores dos parâmetros de regressão}
+\textbf{Inclinação:}
+\begin{equation}\label{formula34}\tag{Fórmula 34}
+    \hat{\beta}_1 = \frac{\sum x_i Y_i - n \overline{x} \, \overline{Y}}{\sum x_i^2 - n \overline{x}^2}
+\end{equation}
+
+\textbf{Ordenada na origem:}
+\begin{equation}\label{formula35}\tag{Fórmula 35}
+    \hat{\beta}_0 = \overline{Y} - \hat{\beta}_1 \, \overline{x}
+\end{equation}
+\end{formulabox}
+
+\subsection{Intervalos de confiança e testes para os parâmetros}
+
+\begin{formulabox}{Estatísticas para inferência sobre $\beta_0$}
+\begin{equation}\label{formula36}\tag{Fórmula 36}
+    \frac{\hat{\beta}_0 - \beta_0}{\sqrt{\left(\frac{1}{n} + \frac{\overline{x}^2}{\sum x_i^2 - n\overline{x}^2}\right)\hat{\sigma}^2}} \sim t_{(n-2)}
+\end{equation}
+\end{formulabox}
+
+\begin{formulabox}{Estatísticas para inferência sobre $\beta_1$}
+\begin{equation}\label{formula37}\tag{Fórmula 37}
+    \frac{\hat{\beta}_1 - \beta_1}{\sqrt{\frac{\hat{\sigma}^2}{\sum x_i^2 - n\overline{x}^2}}} \sim t_{(n-2)}
+\end{equation}
+\end{formulabox}
+
+\begin{formulabox}{Estatísticas para inferência sobre $\beta_0 + \beta_1 x_0$}
+\begin{equation}\label{formula38}\tag{Fórmula 38}
+    \frac{(\hat{\beta}_0 + \hat{\beta}_1 x_0) - (\beta_0 + \beta_1 x_0)}{\sqrt{\left(\frac{1}{n} + \frac{(\overline{x} - x_0)^2}{\sum x_i^2 - n\overline{x}^2}\right)\hat{\sigma}^2}} \sim t_{(n-2)}
+\end{equation}
+\end{formulabox}
+
+\begin{formulabox}{Teste para valor esperado da resposta em $x_0$}
+Para testar $H_0: E(Y|x_0) = e_0$:
+\begin{equation}\label{formula39}\tag{Fórmula 39}
+    T = \frac{\hat{\beta}_0 + \hat{\beta}_1 x_0 - e_0}{\sqrt{\left(\frac{1}{n} + \frac{(\overline{x} - x_0)^2}{\sum_{i=1}^n x_i^2 - n\overline{x}^2}\right)\hat{\sigma}^2}} \sim_{H_0} t_{(n-2)}
+\end{equation}
+\end{formulabox}
+
+\subsection{Coeficiente de determinação}
+
+\begin{formulabox}{Coeficiente de determinação $R^2$}
+Mede a proporção da variabilidade de $Y$ explicada pelo modelo linear:
+\begin{equation}\label{formula40}\tag{Fórmula 40}
+    R^2 = \frac{\left( \sum_{i=1}^n x_i Y_i - n \overline{x} \, \overline{Y} \right)^2}{\left( \sum_{i=1}^n x_i^2 - n \overline{x}^2 \right) \left( \sum_{i=1}^n Y_i^2 - n \overline{Y}^2 \right)}
+\end{equation}
+
+\textbf{Interpretação geral:}
+\begin{itemize}
+    \item $R^2 \approx 0$: Modelo não explica a variabilidade de $Y$
+    \item $R^2 \approx 1$: Modelo explica quase toda a variabilidade de $Y$
+    \item $0 < R^2 < 1$: Proporção da variância explicada pelo modelo
+\end{itemize}
+
+\textbf{Exemplo de interpretação:}
+\begin{itemize}
+    \item \textbf{Se $R^2 = 0.34$:} Cerca de 34\% da variação total da variável resposta $Y$ é explicada pela variável $x$, através do modelo de regressão linear simples ajustado. Podemos concluir que a reta estimada não se ajusta bem ao conjunto de dados.
+    \item \textbf{Critério de ajuste:} Valores de $R^2$ próximos de 0.7 ou superiores indicam um bom ajuste do modelo aos dados.
+\end{itemize}
+\end{formulabox}
+
+\vfill
+\begin{center}
+\textbf{\large Formulário completo com 40 fórmulas numeradas (retiradas de exames)}\\
+\textit{Use-se o índice de fórmulas (página 3) para navegação direta}
+\end{center}
+
+\end{document}
